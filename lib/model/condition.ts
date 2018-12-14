@@ -16,7 +16,7 @@ export enum CONDITION {
 export interface ConditionInterface {
   key: string;
   condition: CONDITION;
-  match: string;
+  match: string | number;
   rename?: string;
   toUpperCase?: boolean;
 }
@@ -25,7 +25,7 @@ export class Condition implements ConditionInterface {
   constructor(
     public key: string,
     public condition: CONDITION,
-    public match: string,
+    public match: string | number,
     public rename?: string,
     public toUpperCase?: boolean
   ) {}
