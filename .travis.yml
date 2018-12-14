@@ -6,6 +6,10 @@ install:
 script:
  - npm run retest
  - npm run cover 
- 
+ - npm version patch -m "Version %s - add sweet badges"
+ - git push && git push --tags
+ - npm publish
+
 # Send coverage data to Coveralls
-after_script: "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
+after_script: 
+- "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
