@@ -9,10 +9,13 @@ node_js:
 install:
  - npm install
 script:
+ - npm run semantic-release-pre
  - npm run build
  - npm run cover 
 after_success:
-  - npm run travis-deploy-once "npm run semantic-release"
+  - npm run publish
+  - npm run travis-deploy-once
+  - npm run semantic-release-post
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
