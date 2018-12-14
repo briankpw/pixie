@@ -89,8 +89,8 @@ function ParseMeasurement(float: number | undefined, value: number, mp: Measurem
     return 0;
   }
 
-  console.log('float');
-  console.log(float);
+  // console.log('float');
+  // console.log(float);
   switch (float) {
     case 0:
     case null:
