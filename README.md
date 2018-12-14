@@ -43,7 +43,7 @@ import * from pixie-transformer
 ```
 
 First, we need some JSON data
-```java
+```javascript typescript
 const firstDataset = [
     { projectId: 'omakDec12<V03', date: '2018-12-12', failed: 6.3, firstPass: 194.0, rework: 0.0 },
     { projectId: 'omakDec10<V03', date: '2018-12-10', failed: 1.9, firstPass: 201.1, rework: 10.0 },
@@ -52,79 +52,12 @@ const firstDataset = [
   ];
   
 const secondDataset = [
-    {
-      timestamp: '2018-10-13T04:57:16.000+00:00',
-      serialNumber: 'Omak_aa181030125646-1',
-      testType: 'OmakSmile',
-      testUnit: 'Ohm',
-      status: 'PASSED',
-      upperLimit: '6.971924E-5',
-      lowerLimit: '3.26874E-5',
-      nominal: '6.94E-5',
-      measured: '5.295931E-5',
-      fixtureId: '3080',
-      isFalse: 'false',
-      isAnomaly: null
-    },
-    {
-      timestamp: '2018-01-30T04:57:50.000+00:00',
-      serialNumber: 'Omak_ab181030125720-1',
-      testType: 'OmakSmile',
-      testUnit: 'Ohm',
-      status: 'PASSED',
-      upperLimit: '6.971924E-5',
-      lowerLimit: '3.26874E-5',
-      nominal: '6.94E-5',
-      measured: '5.306795E-5',
-      fixtureId: '3080',
-      isFalse: 'false',
-      isAnomaly: null
-    },
-    {
-      timestamp: '2018-10-31T04:58:25.000+00:00',
-      serialNumber: 'Omak_aa181030125754-1',
-      testType: 'OmakSmile',
-      testUnit: 'Ohm',
-      status: 'pass',
-      upperLimit: '6.971924E-5',
-      lowerLimit: '3.26874E-5',
-      nominal: '6.94E-5',
-      measured: '5.306223E-5',
-      fixtureId: '3080',
-      failedNodes: null,
-      isFalse: 'true',
-      isAnomaly: null
-    },
-    {
-      timestamp: '2018-11-30T04:58:59.000+00:00',
-      serialNumber: 'Omak_aa181030125829-1',
-      testType: 'OmakSmile',
-      testUnit: 'Ohm',
-      status: 'FAIL',
-      upperLimit: '6.971924E-5',
-      lowerLimit: '3.26874E-5',
-      nominal: '6.94E-5',
-      measured: '5.297646E-5',
-      fixtureId: '3080',
-      isFalse: 'false',
-      isAnomaly: 'true'
-    },
-    {
-      timestamp: '2018-09-30T04:59:33.000+00:00',
-      serialNumber: 'Omak_aa181030125902-1',
-      testType: 'OmakSmile',
-      testUnit: 'Ohm',
-      status: 'Anomaly',
-      upperLimit: '6.971924E-5',
-      lowerLimit: '3.26874E-5',
-      nominal: '6.94E-5',
-      measured: '5.302792E-5',
-      fixtureId: '3080',
-      isFalse: 'false',
-      isAnomaly: null
-    }
+    { timestamp: '2018-10-13T04:57:16.000+00:00', serialNumber: 'Omak_aa181030125646-1', status: 'PASSED', measured: '5.295931E-5' },
+    { timestamp: '2018-01-30T04:57:50.000+00:00', serialNumber: 'Omak_ab181030125720-1', status: 'PASSED', measured: '5.306795E-5' },
+    { timestamp: '2018-10-31T04:58:25.000+00:00', serialNumber: 'Omak_aa181030125754-1', status: 'pass', measured: '5.306223E-5' },
+    { timestamp: '2018-11-30T04:58:59.000+00:00', serialNumber: 'Omak_aa181030125829-1', status: 'FAIL', measured: '5.297646E-5' },
+    { timestamp: '2018-09-30T04:59:33.000+00:00', serialNumber: 'Omak_aa181030125902-1', status: 'Anomaly', measured: '5.302792E-5' }
   ];
-
 ```
 
 ### Dimension & Measurement 
