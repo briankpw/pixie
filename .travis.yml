@@ -11,9 +11,6 @@ node_js:
 script:
  - npm run retest
  - npm run cover 
- - npm version patch -m "Version %s - add sweet badges"
- - git push && git push --tags
- - npm publish
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
 branches:
