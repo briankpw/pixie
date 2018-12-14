@@ -8,7 +8,7 @@
     "start": "tsc && node --inspect dist/",
     "test": "mocha -r ts-node/register test/*.ts",
     "retest": "npm run build && npm run test",
-    "publish": "npm publish --access=public",
+    "publish": "npm publish dist --access=public",
     "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- --compilers ts:ts-node/register test/*.ts - - -R spec",
     "semantic-release": "semantic-release",
     "travis-deploy-once": "travis-deploy-once --pro"

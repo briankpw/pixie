@@ -1,2 +1,5 @@
-lib/
+lib
 dist/test
+test
+coverage
+.travis.yml
