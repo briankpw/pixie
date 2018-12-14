@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import 'mocha';
-import * as index from '../dist/index';
+// import * as index from '../dist/index';
+declare var require: any;
+var index = require('../dist/index.js');
 
 describe('Sorting - @getPixieSort Function Test', () => {
   var data = [
