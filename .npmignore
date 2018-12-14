@@ -1,5 +1,3 @@
-lib
-dist/test
-test
+./test
 coverage
 .travis.yml
