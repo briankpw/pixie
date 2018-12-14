@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
+import * as index from '../dist/index';
 
-declare var require: any;
-var index = require('../dist/index.js');
 describe('Dimenson - @getPixie Function Test', () => {
   var data = [
     { projectId: 'omakDec10<V03', date: '2018-12-12', failed: 6.3, firstPass: 194.0, rework: 0.0 },
