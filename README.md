@@ -43,12 +43,12 @@ import * from pixie-transformer
 ```
 
 First, we need some JSON data
-```
+```java
 const firstDataset = [
-    { projectId: 'omakDec10<V03', date: '2018-12-12', failed: 6.3, firstPass: 194.0, rework: 0.0 },
-    { projectId: 'omakDec10<V03', date: '2018-12-10', failed: 1.9, firstPass: 208.0, rework: 0.0 },
-    { projectId: 'omakDec03<V03', date: '2018-12-11', failed: 0.0, firstPass: 208.0, rework: 0.0 },
-    { projectId: 'ChrSept', date: '2018-12-12', failed: 10.0, firstPass: 3010.0, rework: 0.0 }
+    { projectId: 'omakDec12<V03', date: '2018-12-12', failed: 6.3, firstPass: 194.0, rework: 0.0 },
+    { projectId: 'omakDec10<V03', date: '2018-12-10', failed: 1.9, firstPass: 201.1, rework: 10.0 },
+    { projectId: 'omakDec03<V03', date: '2018-12-11', failed: 90.0, firstPass: 202.9, rework: 0.0 },
+    { projectId: 'ChrSept', date: '2018-12-12', failed: 10.0, firstPass: 3010.01, rework: 0.0 }
   ];
   
 const secondDataset = [
@@ -139,12 +139,11 @@ const secondDataset = [
 
 Expected Response
 ```javascript typescript
- pixieData = {
-      firstPass: [{ x: 1544400000000, y: 208 },
-      { x: 1544486400000, y: 208 },
-      { x: 1544572800000, y: 194 },
-      { x: 1544572800000, y: 3010 }]
-    };
+ pixieData = { firstPass:
+   [ { x: 1544400000000, y: 201.1 },
+     { x: 1544486400000, y: 202.9 },
+     { x: 1544572800000, y: 194 },
+     { x: 1544572800000, y: 3010.01 } ] }
 ```
 
 ### Measurement With Condition & Additional Dimension Binding
