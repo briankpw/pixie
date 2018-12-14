@@ -1,6 +1,6 @@
 {
   "name": "@transformer/pixie",
-  "version": "0.0.0-development",
+  "version": "0.0.0-pixie",
   "description": "With Pixie, user able to configure Dimension, Measurement(1 or Multiple), Filter, Sorting. Easy to generate to generate payload for chart and JSON payload. ",
   "main": "index.js",
   "scripts": {
