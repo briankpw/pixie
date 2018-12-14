@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc && node --inspect dist/",
-    "test": "mocha -r ts-node/register test/measurement.ts",
+    "test": "mocha -r ts-node/register test/*.ts",
     "retest": "npm run build && npm run test",
     "publish": "npm publish --access=public"
   },
