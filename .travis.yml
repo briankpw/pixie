@@ -6,13 +6,14 @@ notifications:
   email: false
 node_js:
   - stable
-  install:
+install:
  - npm install
 script:
  - npm run retest
  - npm run cover 
 after_success:
-  - npm run travis-deploy-once "npm run semantic-release"
+  - npm run travis-deploy-once 
+  - npm run semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
