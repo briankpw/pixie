@@ -1,6 +1,6 @@
 {
   "name": "@transformer/pixie",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "With Pixie, user able to configure Dimension, Measurement(1 or Multiple), Filter, Sorting. Easy to generate to generate payload for chart and JSON payload. ",
   "main": "index.js",
   "scripts": {
@@ -9,11 +9,13 @@
     "test": "mocha -r ts-node/register test/*.ts",
     "retest": "npm run build && npm run test",
     "publish": "npm publish --access=public",
-    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- --compilers ts:ts-node/register test/*.ts - - -R spec"
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- --compilers ts:ts-node/register test/*.ts - - -R spec",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once --pro"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/briankpw/pixie.git"
+    "url": "https://github.com/briankpw/pixie.git"
   },
   "bugs": {
     "url": "https://github.com/briankpw/pixie/issues"
@@ -40,7 +42,9 @@
     "mocha": "^5.2.0",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2",
-    "typings": "^2.1.1"
+    "typings": "^2.1.1",
+    "semantic-release": "^15.12.5",
+    "travis-deploy-once": "^5.0.10"
   },
   "dependencies": {
     "@types/underscore": "^1.8.9",
