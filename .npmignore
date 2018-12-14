@@ -1,6 +1,6 @@
-./lib
-./test
-./dist/test
+/lib
+/test
+/dist/test
 index.ts
 coverage
 .travis.yml
