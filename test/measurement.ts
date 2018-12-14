@@ -213,40 +213,40 @@ describe('Measurement - @getPixie Function Test', () => {
     expect(pixieData).to.deep.equal(expectedData);
   });
 
-  it('1D 2M[DL-3; Rename]', () => {
-    const dimension = new Dimension('timestamp', TYPE.DATE);
-    const measurementList = [
-      new Measurement('measured', CONDITION.NONE, true, undefined, 'value'),
-      new Measurement('upperLimit', CONDITION.NONE, false, undefined, 'values')
-    ];
+  // it('1D 2M[DL-3; Rename]', () => {
+  //   const dimension = new Dimension('timestamp', TYPE.DATE);
+  //   const measurementList = [
+  //     new Measurement('measured', CONDITION.NONE, true, undefined, 'value'),
+  //     new Measurement('upperLimit', CONDITION.NONE, false, undefined, 'values')
+  //   ];
 
-    const dimensionList = [
-      new Dimension('fixtureId', TYPE.NUMBER),
-      new Dimension('nominal', TYPE.DOUBLE),
-      new Dimension('serialNumber', TYPE.ANY)
-    ];
-    const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-    const sort = new Sort(SORT.ACS, ['timestamp']);
-    const pixie = new Pixie(dataAgg, sort);
-    const pixieData = pixie.getPixie();
+  //   const dimensionList = [
+  //     new Dimension('fixtureId', TYPE.NUMBER),
+  //     new Dimension('nominal', TYPE.DOUBLE),
+  //     new Dimension('serialNumber', TYPE.ANY)
+  //   ];
+  //   const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+  //   const sort = new Sort(SORT.ACS, ['timestamp']);
+  //   const pixie = new Pixie(dataAgg, sort);
+  //   const pixieData = pixie.getPixie();
 
-    var expectedData = {
-      measured: [
-        { x: 1517288270000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
-        { x: 1538283573000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
-        { x: 1539406636000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1' },
-        { x: 1540961905000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125754-1' },
-        { x: 1543553939000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125829-1' }
-      ],
-      upperLimit: [
-        { x: 1517288270000, y: 0.0000697 },
-        { x: 1538283573000, y: 0.0000697 },
-        { x: 1539406636000, y: 0.0000697 },
-        { x: 1540961905000, y: 0.0000697 },
-        { x: 1543553939000, y: 0.0000697 }
-      ]
-    };
-    console.log(pixieData);
-    expect(pixieData).to.deep.equal(expectedData);
-  });
+  //   var expectedData = {
+  //     measured: [
+  //       { x: 1517288270000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
+  //       { x: 1538283573000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
+  //       { x: 1539406636000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1' },
+  //       { x: 1540961905000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125754-1' },
+  //       { x: 1543553939000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125829-1' }
+  //     ],
+  //     upperLimit: [
+  //       { x: 1517288270000, y: 0.0000697 },
+  //       { x: 1538283573000, y: 0.0000697 },
+  //       { x: 1539406636000, y: 0.0000697 },
+  //       { x: 1540961905000, y: 0.0000697 },
+  //       { x: 1543553939000, y: 0.0000697 }
+  //     ]
+  //   };
+  //   console.log(pixieData);
+  //   expect(pixieData).to.deep.equal(expectedData);
+  // });
 });

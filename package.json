@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "tsc && node --inspect dist/",
     "test": "mocha -r ts-node/register test/measurement.ts",
-    "retest": "npm run buld && npm run test",
+    "retest": "npm run build && npm run test",
     "publish": "npm publish --access=public"
   },
   "keywords": [
