@@ -1,4 +1,7 @@
+./lib
 ./test
+./dist/test
+index.ts
 coverage
 .travis.yml
 tsconfig.json
