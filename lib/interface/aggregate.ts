@@ -1,5 +1,7 @@
 import { TYPE, Dimension, Measurement, ParseDimension, ParseMeasurement, ParseMeasurementWithFormula } from '../model/type';
 import { CONDITION, Conditioning, Condition } from '../model/condition';
+import { PMATH, PMath } from '../model/pmath';
+
 import { AsArray } from '../util/tool';
 import * as _ from 'underscore';
 
@@ -131,3 +133,4 @@ function Aggregating(d: any, dp: Dimension, mp: Measurement, dimensionList: Arra
 
 export { Pixing };
 export { TYPE, CONDITION, Condition, Dimension, Measurement };
+export { PMATH, PMath }
