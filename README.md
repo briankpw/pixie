@@ -14,10 +14,11 @@ Pixie Transformer is a Raw JSON Payload transform into your expected JSON Payloa
 
 ## Library Interface
 ### Class
-- Dimension
-- Measurement
-- Condition
-- PMath
+- Dimension(column: string, category: TYPE, rename?: string, defaultValue?: any, isIncremental: boolean)
+- Measurement(row: string, condition: Array<Condition>, dimensionListBind: boolean, float?: number, formula?: Array<PMath>, rename?: string, defaultValue?: any, isIncremental: boolean)
+- Condition(key: string, condition: CONDITION, match: string | number, rename?: string, toUpperCase?: boolean)
+- PMath(key: string, pMath: PMATH, isPackageStartEnd?)
+- Sort (sortType: SORT, sortProperty?: any)
 
 ### Enum
 - CONDITION
@@ -48,7 +49,7 @@ const firstDataset = [
     { projectId: 'omakDec12<V03', date: '2018-12-12', failed: 6.3, firstPass: 194.0, rework: 0.0 },
     { projectId: 'omakDec10<V03', date: '2018-12-10', failed: 1.9, firstPass: 201.1, rework: 10.0 },
     { projectId: 'omakDec03<V03', date: '2018-12-11', failed: 90.0, firstPass: 202.9, rework: 0.0 },
-    { projectId: 'ChrSept', date: '2018-12-12', failed: 10.0, firstPass: 3010.01, rework: 0.0 }
+    { projectId: 'ChrSept', date: '2018-12-13', failed: 10.0, firstPass: 250.01, rework: 0.0 }
   ];
   
 const secondDataset = [
@@ -76,8 +77,9 @@ Expected Response
    [ { x: 1544400000000, y: 201.1 },
      { x: 1544486400000, y: 202.9 },
      { x: 1544572800000, y: 194 },
-     { x: 1544572800000, y: 3010.01 } ] }
+     { x: 1544659200000, y: 250.01 } ] }
 ```
+[Visualization Demo](https://jsfiddle.net/yp1tkz25/)
 
 ### Measurement With Condition & Additional Dimension Binding
 
@@ -108,7 +110,6 @@ Expected Response
       }
     };
 ```
-
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
