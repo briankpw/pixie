@@ -4,14 +4,14 @@
 [![Downloads](https://img.shields.io/npm/dt/pixie-transformer.svg)](https://www.npmjs.com/package/pixie-transformer)
 
 # Pixie Transformer
-Pixie Transformer is a Raw JSON Payload transform into your expected JSON Payload. Its make your life easy and convenience without any logical required in your code. You just need to configure Dimension, Measurement(1 or Multiple), Additional Dimension Binding, Filter, Condition, Sorting, Mathematic Formula and etc. The generated payload mostly used for chart series dataset, map dataset, analysis dataset and etc. Depend on your requirement too...
+Pixie Transformer is transforming a Raw/Response JSON Payload into your expected JSON Payload. It's make your life easy and convenience without any logic required in your code. You just need to configure Dimension, Measurement (1 or Multiple), Additional Dimension Binding, Condition, Sorting, Mathematic Formula and etc. Generated Pixie Dataset payload mostly used for chart series dataset, map dataset, analysis dataset and etc. Depend on your requirement too...
 
 ## Pixie Transformer, Suitable used for:
 - Highcharts
 - Chart.js
 - Amchart
 - Any Visualization Tools and Other(s).
-- Any Dataset Wish To Transfer Easily Wihout Any Logic.
+- Any Dataset, You Wish to Transform Easily Without Any Logic.
 
 ## Library Interface
 ### Class
