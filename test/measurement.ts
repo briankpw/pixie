@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import 'mocha';
 // import * as index from '../dist/index';
-declare var require: any;
-var index = require('../dist/index.js');
+declare const require: any;
+const index = require('../dist/index.js');
 
 describe('Measurement - @getPixie Function Test', () => {
-  var data = [
+  const data = [
     {
       timestamp: '2018-10-13T04:57:16.000+00:00',
       serialNumber: 'Omak_aa181030125646-1',
@@ -79,16 +79,14 @@ describe('Measurement - @getPixie Function Test', () => {
     }
   ];
 
-  var TYPE = index.TYPE;
-  var SORT = index.SORT;
-  var CONDITION = index.CONDITION;
-  var PMATH = index.PMATH;
-  var Dimension = index.Dimension;
-  var Measurement = index.Measurement;
-  var PMath = index.PMath;
-  var Aggregate = index.Aggregate;
-  var Sort = index.Sort;
-  var Pixie = index.Pixie;
+  const TYPE = index.TYPE;
+  const SORT = index.SORT;
+  const CONDITION = index.CONDITION;
+  const Dimension = index.Dimension;
+  const Measurement = index.Measurement;
+  const Aggregate = index.Aggregate;
+  const Sort = index.Sort;
+  const Pixie = index.Pixie;
 
   it('1D 1M', () => {
     const dimension = new Dimension('timestamp', TYPE.DATE);
@@ -98,7 +96,7 @@ describe('Measurement - @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: [
         { x: 1517288270000, y: 0.00005306795 },
         { x: 1538283573000, y: 0.00005302792 },
@@ -122,7 +120,7 @@ describe('Measurement - @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: [
         { x: 1517288270000, y: 0.00005306795 },
         { x: 1538283573000, y: 0.00005302792 },
@@ -162,7 +160,7 @@ describe('Measurement - @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: [
         { x: 1517288270000, y: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
         { x: 1538283573000, y: 0.00005302792, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
@@ -195,7 +193,7 @@ describe('Measurement - @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: [
         { x: 1517288270000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
         { x: 1538283573000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
@@ -231,7 +229,7 @@ describe('Measurement - @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: [
         { x: 1517288270000, value: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
         { x: 1538283573000, value: 0.00005302792, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
@@ -267,7 +265,7 @@ describe('Measurement - @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: [
         { x: 1517288270000, y: 520, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
         { x: 1538283573000, y: 520, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
@@ -303,7 +301,7 @@ describe('Measurement - @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: [
         { x: 1517288270000, y: 0, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
         { x: 1538283573000, y: 1, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },

@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import 'mocha';
 // import * as index from '../dist/index';
-declare var require: any;
-var index = require('../dist/index.js');
+declare const require: any;
+const index = require('../dist/index.js');
 
 describe('Measurement With Condition- @getPixie Function Test', () => {
-  var data = [
+  const data = [
     {
       timestamp: '2018-10-13T04:57:16.000+00:00',
       serialNumber: 'Omak_aa181030125646-1',
@@ -79,17 +79,15 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     }
   ];
 
-  var TYPE = index.TYPE;
-  var SORT = index.SORT;
-  var CONDITION = index.CONDITION;
-  var PMath = index.PMath;
-  var PMATH = index.PMATH;
-  var Dimension = index.Dimension;
-  var Measurement = index.Measurement;
-  var Aggregate = index.Aggregate;
-  var Condition = index.Condition;
-  var Sort = index.Sort;
-  var Pixie = index.Pixie;
+  const TYPE = index.TYPE;
+  const SORT = index.SORT;
+  const CONDITION = index.CONDITION;
+  const Dimension = index.Dimension;
+  const Measurement = index.Measurement;
+  const Aggregate = index.Aggregate;
+  const Condition = index.Condition;
+  const Sort = index.Sort;
+  const Pixie = index.Pixie;
 
   it('1D 1M[CONDITION.EQUAL & Rename]', () => {
     const dimension = new Dimension('timestamp', TYPE.DATE);
@@ -101,7 +99,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         unknown: [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -125,7 +123,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         isNotFalse: [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -149,7 +147,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         PASS: [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -178,7 +176,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         Omak_ab: [{ x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' }],
         Omak_a: [
@@ -205,7 +203,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         '-1': [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -229,7 +227,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         unknown: [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -255,7 +253,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         unknown: [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -281,7 +279,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         '0.00005302792': [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -307,7 +305,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         '0.00005302792': [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -341,7 +339,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         pass: [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -371,7 +369,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixie();
 
-    var expectedData = {
+    const expectedData = {
       measured: {
         pass: [
           { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },

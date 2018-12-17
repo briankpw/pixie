@@ -1,27 +1,25 @@
 import { expect } from 'chai';
 import 'mocha';
 // import * as index from '../dist/index';
-declare var require: any;
-var index = require('../dist/index.js');
+declare const require: any;
+const index = require('../dist/index.js');
 
 describe('Sorting - @getPixieSort Function Test', () => {
-  var data = [
+  const data = [
     { projectId: 'omakDec10<V03', date: '2018-12-12', failed: 6.0, firstPass: 194.0, rework: 0.0 },
     { projectId: 'omakDec10<V03', date: '2018-12-10', failed: 0.0, firstPass: 208.0, rework: 0.0 },
     { projectId: 'omakDec03<V03', date: '2018-12-11', failed: 0.0, firstPass: 208.0, rework: 0.0 },
     { projectId: 'ChrSept', date: '2018-12-12', failed: 10.0, firstPass: 3010.0, rework: 0.0 }
   ];
 
-  var TYPE = index.TYPE;
-  var SORT = index.SORT;
-  var CONDITION = index.CONDITION;
-  var PMATH = index.PMATH;
-  var Dimension = index.Dimension;
-  var Measurement = index.Measurement;
-  var PMath = index.PMath;
-  var Aggregate = index.Aggregate;
-  var Sort = index.Sort;
-  var Pixie = index.Pixie;
+  const TYPE = index.TYPE;
+  const SORT = index.SORT;
+  const CONDITION = index.CONDITION;
+  const Dimension = index.Dimension;
+  const Measurement = index.Measurement;
+  const Aggregate = index.Aggregate;
+  const Sort = index.Sort;
+  const Pixie = index.Pixie;
 
   it('Sort By Date [NONE]', () => {
     const dimension = new Dimension('date', TYPE.DATE);
@@ -41,7 +39,7 @@ describe('Sorting - @getPixieSort Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixieSort();
 
-    var expectedData = [
+    const expectedData = [
       { projectId: 'omakDec10<V03', date: '2018-12-10', failed: 0, firstPass: 208, rework: 0 },
       { projectId: 'omakDec03<V03', date: '2018-12-11', failed: 0, firstPass: 208, rework: 0 },
       { projectId: 'omakDec10<V03', date: '2018-12-12', failed: 6, firstPass: 194, rework: 0 },
@@ -58,7 +56,7 @@ describe('Sorting - @getPixieSort Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixieSort();
 
-    var expectedData = [
+    const expectedData = [
       { projectId: 'omakDec10<V03', date: '2018-12-10', failed: 0, firstPass: 208, rework: 0 },
       { projectId: 'omakDec03<V03', date: '2018-12-11', failed: 0, firstPass: 208, rework: 0 },
       { projectId: 'ChrSept', date: '2018-12-12', failed: 10, firstPass: 3010, rework: 0 },
@@ -75,7 +73,7 @@ describe('Sorting - @getPixieSort Function Test', () => {
     const pixie = new Pixie(dataAgg, sort);
     const pixieData = pixie.getPixieSort();
 
-    var expectedData = [
+    const expectedData = [
       { projectId: 'omakDec10<V03', date: '2018-12-12', failed: 6, firstPass: 194, rework: 0 },
       { projectId: 'ChrSept', date: '2018-12-12', failed: 10, firstPass: 3010, rework: 0 },
       { projectId: 'omakDec03<V03', date: '2018-12-11', failed: 0, firstPass: 208, rework: 0 },
