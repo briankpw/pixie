@@ -80,8 +80,6 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
     var TYPE = index.TYPE;
     var SORT = index.SORT;
     var CONDITION = index.CONDITION;
-    var PMath = index.PMath;
-    var PMATH = index.PMATH;
     var Dimension = index.Dimension;
     var Measurement = index.Measurement;
     var Aggregate = index.Aggregate;

@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var _ = require("underscore");
+var math = require("mathjs");
+var tool_1 = require("../util/tool");
 var PMATH;
 (function (PMATH) {
     PMATH[PMATH["NONE"] = 0] = "NONE";
@@ -17,7 +20,7 @@ var PMath = /** @class */ (function () {
     return PMath;
 }());
 exports.PMath = PMath;
-function Calculating(type, value, lastCount) {
+function CalculatingPMath(type, value, lastCount) {
     switch (type) {
         case PMATH.NONE:
             return lastCount;
@@ -30,5 +33,18 @@ function Calculating(type, value, lastCount) {
         case PMATH.DIVIDE:
             return lastCount / value;
     }
+}
+function Calculating(d, formula) {
+    var splitPattern = /[\s()*/%+-]+/g;
+    var formulaWithValue = formula;
+    var formulaKey = formula.split(splitPattern);
+    _.chain(formulaKey)
+        .compact()
+        .each(function (key) {
+        if (!tool_1.IsNumber(key)) {
+            formulaWithValue = tool_1.ReplaceAll(formulaWithValue, key, d[key]);
+        }
+    });
+    return math.eval(formulaWithValue);
 }
 exports.Calculating = Calculating;

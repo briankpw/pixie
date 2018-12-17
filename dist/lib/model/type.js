@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var condition_1 = require("../model/condition");
 var pmath_1 = require("../model/pmath");
-var _ = require("underscore");
 var TYPE;
 (function (TYPE) {
     TYPE[TYPE["ANY"] = 0] = "ANY";
@@ -88,77 +87,12 @@ function ParseMeasurement(float, value, mp, index) {
 exports.ParseMeasurement = ParseMeasurement;
 function ParseMeasurementWithFormula(float, d, formula) {
     var count = 0;
-    var packageCount = 0;
-    var isPackageStartEnd = 0;
-    var firstPackage;
-    var nextMath;
-    var breakMath;
-    // 0-Normal 1=( 2=Normal Package 3=)
-    _.each(formula, function (f, i) {
-        if (typeof f.isPackageStartEnd === 'undefined') {
-            if (isPackageStartEnd === 0) {
-                isPackageStartEnd = 0;
-            }
-            else {
-                isPackageStartEnd = 2;
-            }
-        }
-        else if (f.isPackageStartEnd) {
-            isPackageStartEnd = 1;
-            breakMath = nextMath;
-        }
-        else {
-            isPackageStartEnd = 3;
-        }
-        var dataCount;
-        if (_.isString(f.key)) {
-            dataCount = d[f.key];
-        }
-        else {
-            dataCount = f.key;
-        }
-        if (i === 0) {
-            // When Launch First Time
-            if (isPackageStartEnd === 1) {
-                packageCount = dataCount;
-                firstPackage = true;
-            }
-            else {
-                count = dataCount;
-            }
-            nextMath = f.pMath;
-        }
-        else if (isPackageStartEnd === 0) {
-            // First Value Math With New Value
-            count = pmath_1.Calculating(nextMath, dataCount, count);
-            nextMath = f.pMath;
-        }
-        else if (isPackageStartEnd === 1) {
-            // Bracket Started
-            packageCount = dataCount;
-            nextMath = f.pMath;
-        }
-        else if (isPackageStartEnd === 2) {
-            // Bracket Continue
-            packageCount = pmath_1.Calculating(nextMath, dataCount, packageCount);
-            nextMath = f.pMath;
-        }
-        else if (isPackageStartEnd === 3) {
-            // Bracket End and Count MATH Package
-            packageCount = pmath_1.Calculating(nextMath, dataCount, packageCount);
-            // First Times Ignore Calculations
-            if (firstPackage) {
-                count = packageCount;
-                firstPackage = false;
-            }
-            else {
-                count = pmath_1.Calculating(breakMath, packageCount, count);
-            }
-            nextMath = f.pMath;
-            packageCount = 0;
-            isPackageStartEnd = 0;
-        }
-    });
+    try {
+        count = pmath_1.Calculating(d, formula);
+    }
+    catch (e) {
+        return 0;
+    }
     switch (float) {
         case 0:
         case null:

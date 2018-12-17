@@ -16,5 +16,5 @@ export declare class PMath implements PMathInterface {
     isPackageStartEnd?: boolean | undefined;
     constructor(key: string, pMath: PMATH, isPackageStartEnd?: boolean | undefined);
 }
-declare function Calculating(type: PMATH, value: number, lastCount: number): number;
+declare function Calculating(d: any, formula: string): any;
 export { Calculating };

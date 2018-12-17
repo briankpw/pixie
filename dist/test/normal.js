@@ -13,10 +13,8 @@ describe('getPixie - @Normal Function Test', function () {
     var TYPE = index.TYPE;
     var SORT = index.SORT;
     var CONDITION = index.CONDITION;
-    var PMATH = index.PMATH;
     var Dimension = index.Dimension;
     var Measurement = index.Measurement;
-    var PMath = index.PMath;
     var Aggregate = index.Aggregate;
     var Sort = index.Sort;
     var Pixie = index.Pixie;
