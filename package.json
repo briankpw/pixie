@@ -35,7 +35,7 @@
     "filter",
     "sort",
     "payload",
-    "converting", 
+    "converting",
     "transformer",
     "transform",
     "highcharts",
@@ -58,7 +58,9 @@
     "travis-deploy-once": "^5.0.10"
   },
   "dependencies": {
+    "@types/mathjs": "^4.4.4",
     "@types/underscore": "^1.8.9",
+    "mathjs": "^5.4.0",
     "underscore": "^1.9.1"
   }
 }
