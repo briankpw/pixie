@@ -1,6 +1,6 @@
-import { CONDITION, Condition, ConvertNoneCondition } from '../model/condition';
-import { PMath, PMATH, Calculating } from '../model/pmath';
-import { AsArray } from '../util/tool';
+import { Condition, ConvertNoneCondition } from '../model/condition';
+import { Calculating } from '../model/pmath';
+
 import * as _ from 'underscore';
 
 export enum TYPE {
@@ -24,7 +24,7 @@ export interface MeasurementInterface {
   condition: Array<Condition>;
   dimensionListBind: boolean;
   rename?: string;
-  formula?: Array<PMath>;
+  formula?: string;
   float?: number;
   defaultValue?: any;
   isIncremental: boolean;
@@ -36,7 +36,7 @@ export class Measurement implements MeasurementInterface {
     public condition: Array<Condition> | any,
     public dimensionListBind: boolean = false,
     public float?: number,
-    public formula?: Array<PMath>,
+    public formula?: string,
     public rename?: string,
     public defaultValue?: any,
     public isIncremental = false
@@ -99,72 +99,14 @@ function ParseMeasurement(float: number | undefined, value: number, mp: Measurem
   }
 }
 
-function ParseMeasurementWithFormula(float: number | undefined, d: any, formula: Array<PMath>) {
+function ParseMeasurementWithFormula(float: number | undefined, d: any, formula: string) {
   let count: number = 0;
-  let packageCount: number = 0;
-  let isPackageStartEnd: number = 0;
-  let firstPackage: boolean;
-  let nextMath: PMATH;
-  let breakMath: PMATH;
 
-  // 0-Normal 1=( 2=Normal Package 3=)
-  _.each(formula, (f, i) => {
-    if (typeof f.isPackageStartEnd === 'undefined') {
-      if (isPackageStartEnd === 0) {
-        isPackageStartEnd = 0;
-      } else {
-        isPackageStartEnd = 2;
-      }
-    } else if (f.isPackageStartEnd) {
-      isPackageStartEnd = 1;
-      breakMath = nextMath;
-    } else {
-      isPackageStartEnd = 3;
-    }
-
-    let dataCount;
-    if (_.isString(f.key)) {
-      dataCount = d[f.key];
-    } else {
-      dataCount = f.key;
-    }
-
-    if (i === 0) {
-      // When Launch First Time
-      if (isPackageStartEnd === 1) {
-        packageCount = dataCount;
-        firstPackage = true;
-      } else {
-        count = dataCount;
-      }
-      nextMath = f.pMath;
-    } else if (isPackageStartEnd === 0) {
-      // First Value Math With New Value
-      count = Calculating(nextMath, dataCount, count);
-      nextMath = f.pMath;
-    } else if (isPackageStartEnd === 1) {
-      // Bracket Started
-      packageCount = dataCount;
-      nextMath = f.pMath;
-    } else if (isPackageStartEnd === 2) {
-      // Bracket Continue
-      packageCount = Calculating(nextMath, dataCount, packageCount);
-      nextMath = f.pMath;
-    } else if (isPackageStartEnd === 3) {
-      // Bracket End and Count MATH Package
-      packageCount = Calculating(nextMath, dataCount, packageCount);
-      // First Times Ignore Calculations
-      if (firstPackage) {
-        count = packageCount;
-        firstPackage = false;
-      } else {
-        count = Calculating(breakMath, packageCount, count);
-      }
-      nextMath = f.pMath;
-      packageCount = 0;
-      isPackageStartEnd = 0;
-    }
-  });
+  try {
+    count = Calculating(d, formula);
+  } catch (e) {
+    return 0;
+  }
 
   switch (float) {
     case 0:
