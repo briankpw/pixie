@@ -203,7 +203,6 @@ describe('Measurement With Formula- @getPixie Function Test', () => {
         { x: 1544572800000, y: Infinity, projectId: 'ChrSept' }
       ]
     };
-    console.log(pixieData.yieldMath.pixieAddKey("aa","aas"))
     expect(pixieData).to.deep.equal(expectedData);
   });
 

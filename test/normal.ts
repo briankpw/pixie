@@ -4,7 +4,7 @@ import 'mocha';
 declare const require: any;
 const index = require('../dist/index.js');
 
-describe('getPixie - @Normal Function Test', () => {
+describe('Normal - @getPixie Function Test', () => {
   const data = [
     { projectId: 'omakDec10<V03', date: '2018-12-12', failed: 6.0, firstPass: 194.0, rework: 0.0 },
     { projectId: 'omakDec10<V03', date: '2018-12-10', failed: 0.0, firstPass: 208.0, rework: 0.0 },
