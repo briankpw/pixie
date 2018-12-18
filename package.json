@@ -1,7 +1,7 @@
 {
   "name": "pixie-transformer",
-  "version": "1.0.3",
-  "description": "With Pixie, user able to configure Dimension, Measurement(1 or Multiple), Filter, Sorting. Easy to generate to generate payload for chart and JSON payload. ",
+  "version": "1.1.0",
+  "description": "Pixie Transformer is transforming a Raw/Response JSON Payload into your expected JSON Payload. It's make your life easy and convenience without any logic required in your code.",
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && node --inspect dist/",
