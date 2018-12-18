@@ -1,11 +1,14 @@
 import * as _ from 'underscore';
 
-function pixieGroup(pixieData: any, groupByProperty: string) {
+declare var require: any;
+require('./pixie-prototype');
+
+function pixieGroup(pixieData: any, groupByKey: string): any {
   return _.chain(pixieData)
-    .groupBy(groupByProperty)
+    .groupBy(groupByKey)
     .map(function(value, key) {
-      const mapObject:any = {};
-      mapObject[groupByProperty] = key;
+      const mapObject: any = {};
+      mapObject[groupByKey] = key;
       mapObject['data'] = value;
 
       return mapObject;
@@ -13,107 +16,80 @@ function pixieGroup(pixieData: any, groupByProperty: string) {
     .value();
 }
 
-function pixieSumBy(pixieData: any, groupByProperty: string) {
+// Group By Key and Sum By Y By Default
+function pixieSumGroupBy(pixieData: any, groupByKey: string, sumKey: string): any {
   return _.chain(pixieData)
-    .groupBy(groupByProperty)
-    .map(function(value, key) {
+    .groupBy(groupByKey)
+    .map(function(value) {
+      const payload = { ...value[0] };
       const total = _.reduce(
         value,
         function(acc, val) {
-          return acc + val.y;
+          return acc + val[sumKey];
         },
         0
       );
-      return { x: value[0][groupByProperty], y: total };
+      payload[sumKey] = total;
+      return payload;
     })
     .value();
 }
 
-// function pixieSumAllBy(pixieData: any, groupByProperty: string) {
-//   let total = 0;
-//   _.each(pixieData[groupByProperty], d => {
-//     total += d['y'];
-//   });
-//   return total;
-// }
+function pixieSumBy(pixieData: any, sumKey: string): number {
+  let total = 0;
+  _.each(pixieData, (d: any) => {
+    total += d[sumKey];
+  });
+  return total;
+}
 
-// function pixieSumAllByObject(pixieData: any, sumByProperty: Array<string>) {
-//   _.each(pixieData, function(d, i) {
-//     let total = 0;
-//     _.each(sumByProperty, function(key: string) {
-//       total += d[key];
-//     });
-//     pixieData[i]['total'] = total;
-//   });
-//   return pixieData;
-// }
+function pixieSumByEachObject(pixieData: any, sumByKey: Array<string>): any {
+  const data: Array<any> = [];
+  _.each(pixieData, function(d: any, i) {
+    let total = 0;
+    _.each(sumByKey, function(key: string) {
+      total += d[key];
+    });
+    const obj = { ...d };
+    obj['total'] = total;
+    data.push(obj);
+  });
+  return data;
+}
 
-// function pixieAddKey(pixieData: any, key, value) {
-//   return _.map(pixieData, function(d) {
-//     const mapObject = {};
-//     mapObject[key] = value;
-//     return _.extend(mapObject, d);
-//   });
-// }
+function pixieAddKey(pixieData: any, key: any, value: any): any {
+  return _.map(pixieData, function(d: any) {
+    const mapObject: any = {};
+    mapObject[key] = value;
+    return _.extend(mapObject, d);
+  });
+}
 
-// function pixieReplaceValue(pixieData: any, key, value) {
-//   return _.map(pixieData, function(d) {
-//     const mapObject = {};
-//     mapObject[key] = value;
-//     return _.extend(d, mapObject);
-//   });
-// }
+function pixieReplaceValue(pixieData: any, key: any, value: any): any {
+  return _.map(pixieData, function(d: any) {
+    const mapObject: any = {};
+    mapObject[key] = value;
+    return _.extend(d, mapObject);
+  });
+}
 
-// function pixieRemoveDuplicate(pixieData: any, key?) {
-//   if (_.isArray(pixieData)) {
-//     let keyValue;
-//     let temp = -0.01;
-//     let xTemp;
-//     const arr = [];
+function pixiePluckIncrement(pixieData: any, key: any, rename: any = 'x'): any {
+  const pluck = _.pluck(pixieData, key);
 
-//     if (typeof key !== 'undefined') {
-//       keyValue = key;
-//     } else {
-//       keyValue = 'y';
-//     }
+  return _.map(pluck, function(d, i) {
+    const pluckPixie: any = {};
+    pluckPixie[rename] = i;
+    pluckPixie[key] = d;
+    return pluckPixie;
+  });
+}
 
-//     _.each(pixieData, (d, i) => {
-//       if (d[keyValue] > temp || d[keyValue] < temp) {
-//         if (i !== 0) {
-//           const next: any = {};
-//           next['x'] = xTemp;
-//           next[keyValue] = d[keyValue];
-//           arr.push(next);
-//         }
-
-//         xTemp = d.x;
-//         temp = d[keyValue];
-//         arr.push(d);
-//       }
-//     });
-
-//     if (arr[arr.length - 1].x !== pixieData[pixieData.length - 1].x) {
-//       arr.push(pixieData[pixieData.length - 1]);
-//     }
-//     return arr;
-//   } else {
-//     return [];
-//   }
-// }
-
-// function pixiePluckXIncrement(pixieData: any, key, renameX?) {
-//   const pluck = _.pluck(pixieData, key);
-
-//   return _.map(pluck, function(d, i) {
-//     const pluckPixie = {};
-
-//     if (typeof renameX !== 'undefined') {
-//       pluckPixie[renameX] = i;
-//       pluckPixie[key] = d;
-//     } else {
-//       pluckPixie['x'] = i;
-//       pluckPixie[key] = d;
-//     }
-//     return pluckPixie;
-//   });
-// }
+export {
+  pixieGroup,
+  pixieSumGroupBy,
+  pixieSumBy,
+  pixieSumByEachObject,
+  pixieAddKey,
+  pixieReplaceValue,
+  pixiePluckIncrement
+};
