@@ -48,6 +48,23 @@ describe('Sorting - @getPixieSort Function Test', () => {
     expect(pixieData).to.deep.equal(expectedData);
   });
 
+  it('Sort By Date [DESC]', () => {
+    const dimension = new Dimension('date', TYPE.DATE);
+    const measurementList = [new Measurement('firstPass', CONDITION.NONE)];
+    const dataAgg = new Aggregate(data, dimension, measurementList);
+    const sort = new Sort(SORT.DESC, 'date');
+    const pixie = new Pixie(dataAgg, sort);
+    const pixieData = pixie.getPixieSort();
+
+    const expectedData = [
+      { projectId: 'ChrSept', date: '2018-12-12', failed: 10, firstPass: 3010, rework: 0 },
+      { projectId: 'omakDec10<V03', date: '2018-12-12', failed: 6, firstPass: 194, rework: 0 },
+      { projectId: 'omakDec03<V03', date: '2018-12-11', failed: 0, firstPass: 208, rework: 0 },
+      { projectId: 'omakDec10<V03', date: '2018-12-10', failed: 0, firstPass: 208, rework: 0 }
+    ];
+    expect(pixieData).to.deep.equal(expectedData);
+  });
+
   it('Sort By Date & Project [ACS]', () => {
     const dimension = new Dimension('date', TYPE.DATE);
     const measurementList = [new Measurement('firstPass', CONDITION.NONE)];

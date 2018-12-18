@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
+var tool_1 = require("../util/tool");
 var SORT;
 (function (SORT) {
     SORT[SORT["NONE"] = 0] = "NONE";
@@ -11,6 +12,7 @@ var Sort = /** @class */ (function () {
     function Sort(sortType, sortProperty) {
         this.sortType = sortType;
         this.sortProperty = sortProperty;
+        this.sortProperty = tool_1.AsArray(sortProperty);
     }
     return Sort;
 }());

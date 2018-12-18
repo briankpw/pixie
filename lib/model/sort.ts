@@ -1,5 +1,5 @@
 import * as _ from 'underscore';
-
+import { AsArray } from '../util/tool';
 export enum SORT {
   NONE,
   ACS,
@@ -12,10 +12,12 @@ export interface SortInterface {
 }
 
 export class Sort implements SortInterface {
-  constructor(public sortType: SORT, public sortProperty?: any) {}
+  constructor(public sortType: SORT, public sortProperty?: any) {
+    this.sortProperty = AsArray(sortProperty);
+  }
 }
 
-function Sorting(data: any, sortType: SORT, sortProperty?: any) {
+function Sorting(data: any, sortType: SORT, sortProperty?:any) {
   switch (sortType) {
     case SORT.NONE:
       return data;

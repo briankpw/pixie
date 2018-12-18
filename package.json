@@ -1,6 +1,6 @@
 {
   "name": "pixie-transformer",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Pixie Transformer is transforming a Raw/Response JSON Payload into your expected JSON Payload. It's make your life easy and convenience without any logic required in your code.",
   "main": "dist/index.js",
   "scripts": {
