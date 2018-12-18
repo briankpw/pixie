@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 require('./pixie-prototype');
@@ -19,33 +30,38 @@ function pixieSumGroupBy(pixieData, groupByKey, sumKey) {
     return _.chain(pixieData)
         .groupBy(groupByKey)
         .map(function (value) {
+        var payload = __assign({}, value[0]);
         var total = _.reduce(value, function (acc, val) {
             return acc + val[sumKey];
         }, 0);
-        return { x: value[0][groupByKey], y: total };
+        payload[sumKey] = total;
+        return payload;
     })
         .value();
 }
 exports.pixieSumGroupBy = pixieSumGroupBy;
-function pixieSumAllBy(pixieData, groupByKey) {
+function pixieSumBy(pixieData, sumKey) {
     var total = 0;
-    _.each(pixieData[groupByKey], function (d) {
-        total += d.y;
+    _.each(pixieData, function (d) {
+        total += d[sumKey];
     });
     return total;
 }
-exports.pixieSumAllBy = pixieSumAllBy;
-function pixieSumAllByObject(pixieData, sumByKey) {
+exports.pixieSumBy = pixieSumBy;
+function pixieSumByEachObject(pixieData, sumByKey) {
+    var data = [];
     _.each(pixieData, function (d, i) {
         var total = 0;
         _.each(sumByKey, function (key) {
-            total += d.key;
+            total += d[key];
         });
-        pixieData[i]['total'] = total;
+        var obj = __assign({}, d);
+        obj['total'] = total;
+        data.push(obj);
     });
-    return pixieData;
+    return data;
 }
-exports.pixieSumAllByObject = pixieSumAllByObject;
+exports.pixieSumByEachObject = pixieSumByEachObject;
 function pixieAddKey(pixieData, key, value) {
     return _.map(pixieData, function (d) {
         var mapObject = {};
@@ -62,54 +78,14 @@ function pixieReplaceValue(pixieData, key, value) {
     });
 }
 exports.pixieReplaceValue = pixieReplaceValue;
-function pixieRemoveDuplicate(pixieData, key) {
-    if (_.isArray(pixieData)) {
-        var keyValue_1;
-        var temp_1 = -0.01;
-        var xTemp_1;
-        var arr_1 = [];
-        if (key !== undefined) {
-            keyValue_1 = key;
-        }
-        else {
-            keyValue_1 = 'y';
-        }
-        _.each(pixieData, function (d, i) {
-            if (d[keyValue_1] > temp_1 || d[keyValue_1] < temp_1) {
-                if (i !== 0) {
-                    var next = {};
-                    next['x'] = xTemp_1;
-                    next[keyValue_1] = d[keyValue_1];
-                    arr_1.push(next);
-                }
-                xTemp_1 = d.x;
-                temp_1 = d[keyValue_1];
-                arr_1.push(d);
-            }
-        });
-        if (arr_1[arr_1.length - 1].x !== pixieData[pixieData.length - 1].x) {
-            arr_1.push(pixieData[pixieData.length - 1]);
-        }
-        return arr_1;
-    }
-    else {
-        return [];
-    }
-}
-exports.pixieRemoveDuplicate = pixieRemoveDuplicate;
-function pixiePluckXIncrement(pixieData, key, renameX) {
+function pixiePluckIncrement(pixieData, key, rename) {
+    if (rename === void 0) { rename = 'x'; }
     var pluck = _.pluck(pixieData, key);
     return _.map(pluck, function (d, i) {
         var pluckPixie = {};
-        if (renameX !== undefined) {
-            pluckPixie[renameX] = i;
-            pluckPixie[key] = d;
-        }
-        else {
-            pluckPixie['x'] = i;
-            pluckPixie[key] = d;
-        }
+        pluckPixie[rename] = i;
+        pluckPixie[key] = d;
         return pluckPixie;
     });
 }
-exports.pixiePluckXIncrement = pixiePluckXIncrement;
+exports.pixiePluckIncrement = pixiePluckIncrement;

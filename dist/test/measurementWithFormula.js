@@ -176,7 +176,6 @@ describe('Measurement With Formula- @getPixie Function Test', function () {
                 { x: 1544572800000, y: Infinity, projectId: 'ChrSept' }
             ]
         };
-        console.log(pixieData.yieldMath.pixieAddKey("aa", "aas"));
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
 });
