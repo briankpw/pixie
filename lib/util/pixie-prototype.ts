@@ -21,42 +21,77 @@ declare global {
 }
 
 if (!Array.prototype.pixieGroup) {
-  Array.prototype.pixieGroup = function<T>(this: T[], groupByKey: string): T[] {
-    return pixieGroup(this, groupByKey);
-  };
+  Object.defineProperty(Array.prototype, 'pixieGroup', {
+    value: function<T>(this: T[], groupByKey: string): T[] {
+      return pixieGroup(this, groupByKey);
+    },
+    enumerable: false,
+    configurable: false,
+    writable: true
+  });
 }
 
 if (!Array.prototype.pixieSumGroupBy) {
-  Array.prototype.pixieSumGroupBy = function<T>(this: T[], groupByKey: string, sumByKey: string): T[] {
-    return pixieSumGroupBy(this, groupByKey, sumByKey);
-  };
+  Object.defineProperty(Array.prototype, 'pixieSumGroupBy', {
+    value: function<T>(this: T[], groupByKey: string, sumByKey: string): T[] {
+      return pixieSumGroupBy(this, groupByKey, sumByKey);
+    },
+    enumerable: false,
+    configurable: false,
+    writable: true
+  });
 }
 if (!Array.prototype.pixieSumBy) {
-  Array.prototype.pixieSumBy = function<T>(this: T[], sumByKey: string): number {
-    return pixieSumBy(this, sumByKey);
-  };
+  Object.defineProperty(Array.prototype, 'pixieSumBy', {
+    value: function<T>(this: T[], sumByKey: string): number {
+      return pixieSumBy(this, sumByKey);
+    },
+    enumerable: false,
+    configurable: false,
+    writable: true
+  });
 }
+
 if (!Array.prototype.pixieSumByEachObject) {
-  Array.prototype.pixieSumByEachObject = function<T>(this: T[], sumByKey: Array<string>): T[] {
-    return pixieSumByEachObject(this, sumByKey);
-  };
+  Object.defineProperty(Array.prototype, 'pixieSumByEachObject', {
+    value: function<T>(this: T[], sumByKey: Array<string>): T[] {
+      return pixieSumByEachObject(this, sumByKey);
+    },
+    enumerable: false,
+    configurable: false,
+    writable: true
+  });
 }
 
 if (!Array.prototype.pixieAddKey) {
-  Array.prototype.pixieAddKey = function<T>(this: T[], key: T, value: T): T[] {
-    return pixieAddKey(this, key, value);
-  };
+  Object.defineProperty(Array.prototype, 'pixieAddKey', {
+    value: function<T>(this: T[], key: T, value: T): T[] {
+      return pixieAddKey(this, key, value);
+    },
+    enumerable: false,
+    configurable: false,
+    writable: true
+  });
 }
 
 if (!Array.prototype.pixieReplaceValue) {
-  Array.prototype.pixieReplaceValue = function<T>(this: T[], key: T, value: T): T[] {
-    return pixieReplaceValue(this, key, value);
-  };
+  Object.defineProperty(Array.prototype, 'pixieReplaceValue', {
+    value: function<T>(this: T[], key: T, value: T): T[] {
+      return pixieReplaceValue(this, key, value);
+    },
+    enumerable: false,
+    configurable: false,
+    writable: true
+  });
 }
 
-
 if (!Array.prototype.pixiePluckIncrement) {
-  Array.prototype.pixiePluckIncrement = function<T>(this: T[], key: T, renameX?: T): T[] {
-    return pixiePluckIncrement(this, key, renameX);
-  };
+  Object.defineProperty(Array.prototype, 'pixiePluckIncrement', {
+    value: function<T>(this: T[], key: T, renameX?: T): T[] {
+      return pixiePluckIncrement(this, key, renameX);
+    },
+    enumerable: false,
+    configurable: false,
+    writable: true
+  });
 }

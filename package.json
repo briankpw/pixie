@@ -26,6 +26,7 @@
   "bugs": {
     "url": "https://github.com/briankpw/pixie/issues"
   },
+  "readme": "README.md",
   "homepage": "https://github.com/briankpw/pixie#readme",
   "keywords": [
     "pixie",

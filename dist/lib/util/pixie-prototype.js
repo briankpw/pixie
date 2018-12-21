@@ -2,37 +2,72 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var pixie_1 = require("./pixie");
 if (!Array.prototype.pixieGroup) {
-    Array.prototype.pixieGroup = function (groupByKey) {
-        return pixie_1.pixieGroup(this, groupByKey);
-    };
+    Object.defineProperty(Array.prototype, 'pixieGroup', {
+        value: function (groupByKey) {
+            return pixie_1.pixieGroup(this, groupByKey);
+        },
+        enumerable: false,
+        configurable: false,
+        writable: true
+    });
 }
 if (!Array.prototype.pixieSumGroupBy) {
-    Array.prototype.pixieSumGroupBy = function (groupByKey, sumByKey) {
-        return pixie_1.pixieSumGroupBy(this, groupByKey, sumByKey);
-    };
+    Object.defineProperty(Array.prototype, 'pixieSumGroupBy', {
+        value: function (groupByKey, sumByKey) {
+            return pixie_1.pixieSumGroupBy(this, groupByKey, sumByKey);
+        },
+        enumerable: false,
+        configurable: false,
+        writable: true
+    });
 }
 if (!Array.prototype.pixieSumBy) {
-    Array.prototype.pixieSumBy = function (sumByKey) {
-        return pixie_1.pixieSumBy(this, sumByKey);
-    };
+    Object.defineProperty(Array.prototype, 'pixieSumBy', {
+        value: function (sumByKey) {
+            return pixie_1.pixieSumBy(this, sumByKey);
+        },
+        enumerable: false,
+        configurable: false,
+        writable: true
+    });
 }
 if (!Array.prototype.pixieSumByEachObject) {
-    Array.prototype.pixieSumByEachObject = function (sumByKey) {
-        return pixie_1.pixieSumByEachObject(this, sumByKey);
-    };
+    Object.defineProperty(Array.prototype, 'pixieSumByEachObject', {
+        value: function (sumByKey) {
+            return pixie_1.pixieSumByEachObject(this, sumByKey);
+        },
+        enumerable: false,
+        configurable: false,
+        writable: true
+    });
 }
 if (!Array.prototype.pixieAddKey) {
-    Array.prototype.pixieAddKey = function (key, value) {
-        return pixie_1.pixieAddKey(this, key, value);
-    };
+    Object.defineProperty(Array.prototype, 'pixieAddKey', {
+        value: function (key, value) {
+            return pixie_1.pixieAddKey(this, key, value);
+        },
+        enumerable: false,
+        configurable: false,
+        writable: true
+    });
 }
 if (!Array.prototype.pixieReplaceValue) {
-    Array.prototype.pixieReplaceValue = function (key, value) {
-        return pixie_1.pixieReplaceValue(this, key, value);
-    };
+    Object.defineProperty(Array.prototype, 'pixieReplaceValue', {
+        value: function (key, value) {
+            return pixie_1.pixieReplaceValue(this, key, value);
+        },
+        enumerable: false,
+        configurable: false,
+        writable: true
+    });
 }
 if (!Array.prototype.pixiePluckIncrement) {
-    Array.prototype.pixiePluckIncrement = function (key, renameX) {
-        return pixie_1.pixiePluckIncrement(this, key, renameX);
-    };
+    Object.defineProperty(Array.prototype, 'pixiePluckIncrement', {
+        value: function (key, renameX) {
+            return pixie_1.pixiePluckIncrement(this, key, renameX);
+        },
+        enumerable: false,
+        configurable: false,
+        writable: true
+    });
 }

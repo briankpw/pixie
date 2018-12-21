@@ -162,7 +162,7 @@ pixieData = {
 
 [Highcharts Demo](https://jsfiddle.net/3beqjspm/)
 
-### Pixie
+### Pixie Function
 
 ```javascript typescript
 pixieData = pixie.getPixie();
