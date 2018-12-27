@@ -105,6 +105,8 @@ pixieData = {
 
 [Highcharts Demo](https://jsfiddle.net/yp1tkz25/)
 
+[Amcharts Demo](http://jsfiddle.net/e739nph8/)
+
 ### Measurement With Condition & Additional Dimension Binding
 
 ```javascript typescript
