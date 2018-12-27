@@ -2,6 +2,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/briankpw/pixie/badge.svg)](https://coveralls.io/github/briankpw/pixie)
 [![npm version](https://badge.fury.io/js/pixie-transformer.svg)](https://badge.fury.io/js/pixie-transformer)
 [![Downloads](https://img.shields.io/npm/dt/pixie-transformer.svg)](https://www.npmjs.com/package/pixie-transformer)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/briankpw)
+
 
 # Pixie Transformer
 
