@@ -2,8 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/briankpw/pixie/badge.svg)](https://coveralls.io/github/briankpw/pixie)
 [![npm version](https://badge.fury.io/js/pixie-transformer.svg)](https://badge.fury.io/js/pixie-transformer)
 [![Downloads](https://img.shields.io/npm/dt/pixie-transformer.svg)](https://www.npmjs.com/package/pixie-transformer)
-[![Dependency Status](https://david-dm.org/briankpw/pixie.svg)](https://david-dm.org/briankpw/pixie) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbriankpw%2Fpixie.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbriankpw%2Fpixie?ref=badge_shield)
-
+[![Dependency Status](https://david-dm.org/briankpw/pixie.svg)](https://david-dm.org/briankpw/pixie) 
 [![devDependencies Status](https://david-dm.org/briankpw/pixie/dev-status.svg)](https://david-dm.org/briankpw/pixie?type=dev) 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/briankpw)
 
@@ -341,5 +340,6 @@ Please make sure to update tests as appropriate.
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbriankpw%2Fpixie.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbriankpw%2Fpixie?ref=badge_shield)
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbriankpw%2Fpixie.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbriankpw%2Fpixie?ref=badge_large)
