@@ -2,8 +2,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/briankpw/pixie/badge.svg)](https://coveralls.io/github/briankpw/pixie)
 [![npm version](https://badge.fury.io/js/pixie-transformer.svg)](https://badge.fury.io/js/pixie-transformer)
 [![Downloads](https://img.shields.io/npm/dt/pixie-transformer.svg)](https://www.npmjs.com/package/pixie-transformer)
-[![Dependency Status](https://david-dm.org/briankpw/pixie.svg)](https://david-dm.org/briankpw/pixie) 
-[![devDependencies Status](https://david-dm.org/briankpw/pixie/dev-status.svg)](https://david-dm.org/briankpw/pixie?type=dev) 
+[![Dependency Status](https://david-dm.org/briankpw/pixie.svg)](https://david-dm.org/briankpw/pixie)
+[![devDependencies Status](https://david-dm.org/briankpw/pixie/dev-status.svg)](https://david-dm.org/briankpw/pixie?type=dev)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/briankpw)
 
 # Pixie Transformer
@@ -17,6 +17,22 @@ Pixie Transformer is transforming a Raw/Response JSON Payload into your expected
 - Amchart
 - Any Visualization Tools and Other(s).
 - Any Dataset, You Wish to Transform Easily Without Any Logic.
+
+## Table of Contents
+
+- [Library Interface](#library-interface)
+  - [Class](#class)
+  - [Enum](#enum)
+  - [Feature](#feature)
+  - [Pixie Function](#pixie-function)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Dimension & Measurement](#dimension--measurement)
+  - [Measurement With Condition & Additional Dimension Binding](#measurement-with-condition--additional-dimension-binding)
+  - [Mathematic Formula](#mathematic-formula)
+  - [Pixie Function](#pixie-function-1)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Library Interface
 
@@ -112,9 +128,11 @@ pixieData = {
 
 ```javascript typescript
 const dimension = new Dimension('timestamp', TYPE.DATE);
-const conditionList = [new Condition('status', CONDITION.CONTAIN, 'pass','pass'), 
-new Condition('status', CONDITION.CONTAIN, 'PASS','pass'),
-new Condition('status', CONDITION.EQUAL, 'Anomaly')];
+const conditionList = [
+  new Condition('status', CONDITION.CONTAIN, 'pass', 'pass'),
+  new Condition('status', CONDITION.CONTAIN, 'PASS', 'pass'),
+  new Condition('status', CONDITION.EQUAL, 'Anomaly')
+];
 const measurementList = [new Measurement('measured', conditionList, true)];
 const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
 const dataAgg = new Aggregate(secondDataset, dimension, measurementList, dimensionList);
@@ -264,11 +282,11 @@ Expected Response
 
 ```javascript typescript
 const pixieProtoData = [
-  { x: 1517288270000, y: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1', total: 1517288273080  },
-  { x: 1538283573000, y: 0.00005302792, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1', total: 1538283576080  },
-  { x: 1539406636000, y: 0.00005295931, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1', total: 1539406639080  },
-  { x: 1540961905000, y: 0.00005306223, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125754-1', total: 1540961908080  },
-  { x: 1543553939000, y: 0.00005297646, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125754-1', total: 1543553942080  }
+  { x: 1517288270000, y: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1', total: 1517288273080 },
+  { x: 1538283573000, y: 0.00005302792, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1', total: 1538283576080 },
+  { x: 1539406636000, y: 0.00005295931, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1', total: 1539406639080 },
+  { x: 1540961905000, y: 0.00005306223, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125754-1', total: 1540961908080 },
+  { x: 1543553939000, y: 0.00005297646, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125754-1', total: 1543553942080 }
 ];
 ```
 
