@@ -4,40 +4,36 @@ import { Sort, SORT, Sorting } from './interface/sort';
 import { Aggregate, Dimension, Measurement, TYPE, Pixing } from './interface/aggregate';
 
 export class Pixie {
-  private data: any;
-  private measurement: Array<Measurement> = [];
+  private _data: any;
+  private _measurement: Array<Measurement> = [];
 
-  private dimension: Dimension = new Dimension('null', TYPE.ANY);
-  private dimensionList?: Array<Dimension>;
+  private _dimension: Dimension = new Dimension('null', TYPE.ANY);
+  private _dimensionList?: Array<Dimension>;
 
-  private sortType: SORT = SORT.NONE;
-  private sortProperty: Array<string> | undefined;
+  private _sortType: SORT = SORT.NONE;
+  private _sortProperty: Array<string> | undefined;
 
   constructor(aggregateBinding?: Aggregate, sortBinding?: Sort) {
     if (aggregateBinding !== undefined) {
-      this.data = aggregateBinding.data;
-      this.measurement = aggregateBinding.measurement;
+      this._data = aggregateBinding.data;
+      this._measurement = aggregateBinding.measurement;
 
-      this.dimension = aggregateBinding.dimension;
-      this.dimensionList = aggregateBinding.dimensionList;
+      this._dimension = aggregateBinding.dimension;
+      this._dimensionList = aggregateBinding.dimensionList;
     }
 
     if (sortBinding !== undefined) {
-      this.sortType = sortBinding.sortType;
-      this.sortProperty = sortBinding.sortProperty;
+      this._sortType = sortBinding.sortType;
+      this._sortProperty = sortBinding.sortProperty;
     }
   }
 
   getPixie() {
     const sortData = this.getPixieSort();
-    return Pixing(sortData, this.dimension, this.measurement, this.dimensionList);
+    return Pixing(sortData, this._dimension, this._measurement, this._dimensionList);
   }
 
   getPixieSort() {
-    return Sorting(this.data, this.sortType, this.sortProperty);
+    return Sorting(this._data, this._sortType, this._sortProperty);
   }
-
-  // Util
 }
-
-console.log()
