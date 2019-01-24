@@ -112,7 +112,9 @@ pixieData = {
 
 ```javascript typescript
 const dimension = new Dimension('timestamp', TYPE.DATE);
-const conditionList = [new Condition('status', CONDITION.CONTAIN, 'pass'), new Condition('status', CONDITION.CONTAIN, 'PASS')];
+const conditionList = [new Condition('status', CONDITION.CONTAIN, 'pass','pass'), 
+new Condition('status', CONDITION.CONTAIN, 'PASS','pass'),
+new Condition('status', CONDITION.EQUAL, 'Anomaly')];
 const measurementList = [new Measurement('measured', conditionList, true)];
 const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
 const dataAgg = new Aggregate(secondDataset, dimension, measurementList, dimensionList);
