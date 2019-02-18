@@ -6,34 +6,47 @@ export enum SORT {
   DESC
 }
 
+import { SortByNatural } from '../util/nature-sort';
+
 export interface SortInterface {
   sortType: SORT;
   sortProperty?: Array<string>;
+  naturalSort?: boolean;
 }
 
 export class Sort implements SortInterface {
-  constructor(public sortType: SORT, public sortProperty?: any) {
+  constructor(public sortType: SORT, public sortProperty?: any, public naturalSort?: boolean) {
     this.sortProperty = AsArray(sortProperty);
   }
 }
 
-function Sorting(data: any, sortType: SORT, sortProperty?:any) {
+function Sorting(data: any, sortType: SORT, sortProperty?: any, naturalSort?: boolean) {
   switch (sortType) {
     case SORT.NONE:
       return data;
     case SORT.ACS: {
-      return toSort(data, sortProperty);
+      return toSort(data, sortProperty, naturalSort);
     }
     case SORT.DESC: {
-      return toSort(data, sortProperty).reverse();
+      return toSort(data, sortProperty, naturalSort).reverse();
     }
   }
 }
 
-function toSort(data: any, sortProperty?: any) {
+function toSort(data: any, sortProperty?: any, naturalSort?: Boolean) {
   let sortData = data;
+  if (naturalSort == undefined) {
+    naturalSort = false;
+  }
+
   _.each(sortProperty.reverse(), (d: any) => {
-    sortData = _.sortBy(sortData, d);
+    if (naturalSort) {
+      sortData = SortByNatural(sortData, function(obj: any) {
+        return obj[d];
+      });
+    } else {
+      sortData = _.sortBy(sortData, d);
+    }
   });
   return sortData;
 }

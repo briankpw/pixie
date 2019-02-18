@@ -16,6 +16,7 @@ var Pixie = /** @class */ (function () {
         if (sortBinding !== undefined) {
             this._sortType = sortBinding.sortType;
             this._sortProperty = sortBinding.sortProperty;
+            this._naturalSort = sortBinding.naturalSort;
         }
     }
     Pixie.prototype.getPixie = function () {
@@ -23,7 +24,7 @@ var Pixie = /** @class */ (function () {
         return aggregate_1.Pixing(sortData, this._dimension, this._measurement, this._dimensionList);
     };
     Pixie.prototype.getPixieSort = function () {
-        return sort_1.Sorting(this._data, this._sortType, this._sortProperty);
+        return sort_1.Sorting(this._data, this._sortType, this._sortProperty, this._naturalSort);
     };
     return Pixie;
 }());

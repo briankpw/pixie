@@ -41,7 +41,7 @@ Pixie Transformer is transforming a Raw/Response JSON Payload into your expected
 - Dimension(column: string, category: TYPE, rename?: string, defaultValue?: any, isIncremental: boolean)
 - Measurement(row: string, condition: Array<Condition>, dimensionListBind: boolean, float?: number, formula?: string, rename?: string, defaultValue?: any, isIncremental: boolean)
 - Condition(key: string, condition: CONDITION, match: string | number, rename?: string, toUpperCase?: boolean)
-- Sort (sortType: SORT, sortProperty?: any)
+- Sort (sortType: SORT, sortProperty?: any, naturalSort?: boolean)
 
 ### Enum
 

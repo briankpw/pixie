@@ -7,6 +7,7 @@ export declare class Pixie {
     private _dimensionList?;
     private _sortType;
     private _sortProperty;
+    private _naturalSort;
     constructor(aggregateBinding?: Aggregate, sortBinding?: Sort);
     getPixie(): any;
     getPixieSort(): any;
