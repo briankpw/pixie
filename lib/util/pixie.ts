@@ -1,5 +1,5 @@
 import * as _ from 'underscore';
-
+import { AsArray, DeepClone } from './tool';
 declare var require: any;
 require('./pixie-prototype');
 
@@ -17,20 +17,28 @@ function pixieGroup(pixieData: any, groupByKey: string): any {
 }
 
 // Group By Key and Sum By Y By Default
-function pixieSumGroupBy(pixieData: any, groupByKey: string, sumKey: string): any {
+function pixieSumGroupBy(pixieData: any, groupByKey: string, sumKey: Array<string>): any {
   return _.chain(pixieData)
     .groupBy(groupByKey)
     .map(function(value) {
-      const payload = { ...value[0] };
-      const total = _.reduce(
-        value,
-        function(acc, val) {
-          return acc + val[sumKey];
+      const obj = DeepClone(value);
+
+      // Clone first object for reduce object template 
+      const clearObj = { ...obj[0] };
+      _.each(AsArray(sumKey), function(d:any) {
+        clearObj[d] = 0;
+      });
+
+      return _.reduce(
+        obj,
+        function(acc: any, val: any) {
+          _.each(AsArray(sumKey), function(d: any) {
+            acc[d] += val[d];
+          });
+          return acc;
         },
-        0
+        clearObj
       );
-      payload[sumKey] = total;
-      return payload;
     })
     .value();
 }
@@ -84,12 +92,4 @@ function pixiePluckIncrement(pixieData: any, key: any, rename: any = 'x'): any {
   });
 }
 
-export {
-  pixieGroup,
-  pixieSumGroupBy,
-  pixieSumBy,
-  pixieSumByEachObject,
-  pixieAddKey,
-  pixieReplaceValue,
-  pixiePluckIncrement
-};
+export { pixieGroup, pixieSumGroupBy, pixieSumBy, pixieSumByEachObject, pixieAddKey, pixieReplaceValue, pixiePluckIncrement };

@@ -49,12 +49,22 @@ describe('Pixie Function - @Pixie Function Test', () => {
     expect(pixieData).to.deep.equal(expectedData);
   });
 
-  it('pixieSumGroupBy', () => {
+  it('pixieSumGroupBy-String', () => {
     const pixieData = pixieSumGroupBy(rawPixieData.measured, 'serialNumber', 'nominal');
     const expectedData = [
       { x: 1517288270000, y: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
       { x: 1538283573000, y: 0.00005302792, fixtureId: 3080, nominal: 0.0001388, serialNumber: 'Omak_aa181030125646-1' },
       { x: 1540961905000, y: 0.00005306223, fixtureId: 3080, nominal: 0.0001388, serialNumber: 'Omak_aa181030125754-1' }
+    ];
+    expect(pixieData).to.deep.equal(expectedData);
+  });
+
+  it('pixieSumGroupBy-Array', () => {
+    const pixieData = pixieSumGroupBy(rawPixieData.measured, 'serialNumber', ['nominal','fixtureId']);
+    const expectedData = [
+      { x: 1517288270000, y: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
+      { x: 1538283573000, y: 0.00005302792, fixtureId: 6160, nominal: 0.0001388, serialNumber: 'Omak_aa181030125646-1' },
+      { x: 1540961905000, y: 0.00005306223, fixtureId: 6160, nominal: 0.0001388, serialNumber: 'Omak_aa181030125754-1' }
     ];
     expect(pixieData).to.deep.equal(expectedData);
   });

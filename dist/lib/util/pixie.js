@@ -12,6 +12,7 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
+var tool_1 = require("./tool");
 require('./pixie-prototype');
 function pixieGroup(pixieData, groupByKey) {
     return _.chain(pixieData)
@@ -30,12 +31,18 @@ function pixieSumGroupBy(pixieData, groupByKey, sumKey) {
     return _.chain(pixieData)
         .groupBy(groupByKey)
         .map(function (value) {
-        var payload = __assign({}, value[0]);
-        var total = _.reduce(value, function (acc, val) {
-            return acc + val[sumKey];
-        }, 0);
-        payload[sumKey] = total;
-        return payload;
+        var obj = tool_1.DeepClone(value);
+        // Clone first object for reduce object template 
+        var clearObj = __assign({}, obj[0]);
+        _.each(tool_1.AsArray(sumKey), function (d) {
+            clearObj[d] = 0;
+        });
+        return _.reduce(obj, function (acc, val) {
+            _.each(tool_1.AsArray(sumKey), function (d) {
+                acc[d] += val[d];
+            });
+            return acc;
+        }, clearObj);
     })
         .value();
 }

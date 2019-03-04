@@ -22,4 +22,22 @@ function replaceAll(formula: string, search: string, replacement: any) {
   return target.split(search).join(replacement);
 }
 
-export { asArray as AsArray, replaceAll as ReplaceAll, isNumber as IsNumber };
+function deepClone(obj:any):any {
+  return !obj || typeof obj !== 'object'
+    ? obj
+    : _.isString(obj)
+    ? String.prototype.slice.call(obj)
+    : _.isDate(obj)
+    ? new Date(obj.valueOf())
+    : _.isFunction(obj.clone)
+    ? obj.clone()
+    : _.isArray(obj)
+    ? _.map(obj, function(t) {
+        return deepClone(t);
+      })
+    : _.mapObject(obj, function(val, key) {
+        return deepClone(val);
+      });
+}
+
+export { asArray as AsArray, replaceAll as ReplaceAll, isNumber as IsNumber, deepClone as DeepClone };

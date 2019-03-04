@@ -23,3 +23,21 @@ function replaceAll(formula, search, replacement) {
     return target.split(search).join(replacement);
 }
 exports.ReplaceAll = replaceAll;
+function deepClone(obj) {
+    return !obj || typeof obj !== 'object'
+        ? obj
+        : _.isString(obj)
+            ? String.prototype.slice.call(obj)
+            : _.isDate(obj)
+                ? new Date(obj.valueOf())
+                : _.isFunction(obj.clone)
+                    ? obj.clone()
+                    : _.isArray(obj)
+                        ? _.map(obj, function (t) {
+                            return deepClone(t);
+                        })
+                        : _.mapObject(obj, function (val, key) {
+                            return deepClone(val);
+                        });
+}
+exports.DeepClone = deepClone;

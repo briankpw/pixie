@@ -33,7 +33,7 @@ if (!Array.prototype.pixieGroup) {
 
 if (!Array.prototype.pixieSumGroupBy) {
   Object.defineProperty(Array.prototype, 'pixieSumGroupBy', {
-    value: function<T>(this: T[], groupByKey: string, sumByKey: string): T[] {
+    value: function<T>(this: T[], groupByKey: string, sumByKey: Array<string>): T[] {
       return pixieSumGroupBy(this, groupByKey, sumByKey);
     },
     enumerable: false,
