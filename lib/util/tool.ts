@@ -22,7 +22,7 @@ function replaceAll(formula: string, search: string, replacement: any) {
   return target.split(search).join(replacement);
 }
 
-function deepClone(obj:any):any {
+function deepClone(obj: any): any {
   return !obj || typeof obj !== 'object'
     ? obj
     : _.isString(obj)
@@ -38,6 +38,24 @@ function deepClone(obj:any):any {
     : _.mapObject(obj, function(val, key) {
         return deepClone(val);
       });
+}
+
+function chunkObj(object: Object, size: number) {
+  var values = _.values(object);
+  var final = [];
+  var counter: number = 0;
+  var portion: any = {};
+
+  for (var key in object) {
+    if (counter !== 0 && counter % size === 0) {
+      final.push(portion);
+      portion = {};
+    }
+    portion[key] = values[counter];
+    counter++;
+  }
+  final.push(portion);
+  return final;
 }
 
 export { asArray as AsArray, replaceAll as ReplaceAll, isNumber as IsNumber, deepClone as DeepClone };

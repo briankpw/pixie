@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var _ = require("underscore");
+const _ = require("underscore");
 function SortByNatural(obj, value, context) {
     var iterator = _.isFunction(value)
         ? value
@@ -16,12 +16,38 @@ function SortByNatural(obj, value, context) {
     }).sort(function (left, right) {
         var a = left.criteria;
         var b = right.criteria;
-        return NaturalSort(a, b);
+        return StandardNaturalSort(a, b);
     }), 'value');
 }
-exports.SortByNatural = SortByNatural;
-function NaturalSort(a, b) {
-    var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi, sre = /(^[ ]*|[ ]*$)/g, dre = /(^([\w ]+,?[\w ]+)?[\w ]+,?[\w ]+\d+:\d+(:\d+)?[\w ]?|^\d{1,4}[\/\-]\d{1,4}[\/\-]\d{1,4}|^\w+, \w+ \d+, \d{4})/, hre = /^0x[0-9a-f]+$/i, ore = /^0/, i = function (s) {
+// Performance is 3x Faster of StandardNaturalSort 
+function NaturalSort(a, b, property) {
+    const ax = [], bx = [];
+    if (a[property] == null) {
+        a[property] = '';
+    }
+    if (b[property] == null) {
+        b[property] = '';
+    }
+    a[property].replace(/(\d+)|(\D+)/g, function (_, $1, $2) {
+        ax.push([$1 || Infinity, $2 || '']);
+    });
+    b[property].replace(/(\d+)|(\D+)/g, function (_, $1, $2) {
+        bx.push([$1 || Infinity, $2 || '']);
+    });
+    while (ax.length && bx.length) {
+        const an = ax.shift();
+        const bn = bx.shift();
+        const nn = an[0] - bn[0] || an[1].localeCompare(bn[1]);
+        if (nn) {
+            return nn;
+        }
+    }
+    return ax.length - bx.length;
+}
+exports.NaturalSort = NaturalSort;
+// Performance is Slow
+function StandardNaturalSort(a, b) {
+    let re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi, sre = /(^[ ]*|[ ]*$)/g, dre = /(^([\w ]+,?[\w ]+)?[\w ]+,?[\w ]+\d+:\d+(:\d+)?[\w ]?|^\d{1,4}[\/\-]\d{1,4}[\/\-]\d{1,4}|^\w+, \w+ \d+, \d{4})/, hre = /^0x[0-9a-f]+$/i, ore = /^0/, i = function (s) {
         // return (NaturalSort.insensitive && ('' + s).toLowerCase()) || '' + s;
         return ('' + s).toLowerCase() || '' + s;
     }, 
@@ -66,4 +92,3 @@ function NaturalSort(a, b) {
     }
     return 0;
 }
-exports.NaturalSort = NaturalSort;

@@ -6,7 +6,7 @@ export enum SORT {
   DESC
 }
 
-import { SortByNatural } from '../util/nature-sort';
+import { NaturalSort } from '../util/nature-sort';
 
 export interface SortInterface {
   sortType: SORT;
@@ -41,8 +41,8 @@ function toSort(data: any, sortProperty?: any, naturalSort?: Boolean) {
 
   _.each(sortProperty.reverse(), (d: any) => {
     if (naturalSort) {
-      sortData = SortByNatural(sortData, function(obj: any) {
-        return obj[d];
+      sortData = sortData.sort((a: any, b: any) => {
+        return NaturalSort(a, b, d);
       });
     } else {
       sortData = _.sortBy(sortData, d);

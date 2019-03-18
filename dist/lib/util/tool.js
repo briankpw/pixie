@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var _ = require("underscore");
+const _ = require("underscore");
 function asArray(input) {
     if (typeof input === 'undefined') {
         return [];
@@ -41,3 +41,19 @@ function deepClone(obj) {
                         });
 }
 exports.DeepClone = deepClone;
+function chunkObj(object, size) {
+    var values = _.values(object);
+    var final = [];
+    var counter = 0;
+    var portion = {};
+    for (var key in object) {
+        if (counter !== 0 && counter % size === 0) {
+            final.push(portion);
+            portion = {};
+        }
+        portion[key] = values[counter];
+        counter++;
+    }
+    final.push(portion);
+    return final;
+}
