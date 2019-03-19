@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var chai_1 = require("chai");
+const chai_1 = require("chai");
 require("mocha");
 var index = require('../dist/index.js');
-describe('Pixie ProtoType - @Pixie-ProtoType Function Test', function () {
-    var data = [
+describe('Pixie ProtoType - @Pixie-ProtoType Function Test', () => {
+    const data = [
         {
             timestamp: '2018-10-13T04:57:16.000+00:00',
             serialNumber: 'Omak_aa181030125646-1',
@@ -77,28 +77,28 @@ describe('Pixie ProtoType - @Pixie-ProtoType Function Test', function () {
             isAnomaly: null
         }
     ];
-    var TYPE = index.TYPE;
-    var SORT = index.SORT;
-    var CONDITION = index.CONDITION;
-    var Dimension = index.Dimension;
-    var Measurement = index.Measurement;
-    var Aggregate = index.Aggregate;
-    var Sort = index.Sort;
-    var Pixie = index.Pixie;
-    var dimension = new Dimension('timestamp', TYPE.DATE);
-    var measurementList = [new Measurement('measured', CONDITION.NONE, true), new Measurement('upperLimit', CONDITION.NONE)];
-    var dimensionList = [
+    const TYPE = index.TYPE;
+    const SORT = index.SORT;
+    const CONDITION = index.CONDITION;
+    const Dimension = index.Dimension;
+    const Measurement = index.Measurement;
+    const Aggregate = index.Aggregate;
+    const Sort = index.Sort;
+    const Pixie = index.Pixie;
+    const dimension = new Dimension('timestamp', TYPE.DATE);
+    const measurementList = [new Measurement('measured', CONDITION.NONE, true), new Measurement('upperLimit', CONDITION.NONE)];
+    const dimensionList = [
         new Dimension('fixtureId', TYPE.NUMBER),
         new Dimension('nominal', TYPE.DOUBLE),
         new Dimension('serialNumber', TYPE.ANY)
     ];
-    var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-    var sort = new Sort(SORT.ACS, ['timestamp']);
-    var pixie = new Pixie(dataAgg, sort);
-    var pixieData = pixie.getPixie();
-    it('pixieGroup', function () {
-        var pixieProtoData = pixieData.measured.pixieGroup('serialNumber');
-        var expectedData = [
+    const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+    const sort = new Sort(SORT.ACS, ['timestamp']);
+    const pixie = new Pixie(dataAgg, sort);
+    const pixieData = pixie.getPixie();
+    it('pixieGroup', () => {
+        const pixieProtoData = pixieData.measured.pixieGroup('serialNumber');
+        const expectedData = [
             {
                 serialNumber: 'Omak_aa181030125720-1',
                 data: [{ x: 1517288270000, y: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' }]
@@ -120,23 +120,23 @@ describe('Pixie ProtoType - @Pixie-ProtoType Function Test', function () {
         ];
         chai_1.expect(pixieProtoData).to.deep.equal(expectedData);
     });
-    it('pixieSumGroupBy', function () {
-        var pixieProtoData = pixieData.measured.pixieSumGroupBy('serialNumber', 'nominal');
-        var expectedData = [
+    it('pixieSumGroupBy', () => {
+        const pixieProtoData = pixieData.measured.pixieSumGroupBy('serialNumber', 'nominal');
+        const expectedData = [
             { x: 1517288270000, y: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
             { x: 1538283573000, y: 0.00005302792, fixtureId: 3080, nominal: 0.0001388, serialNumber: 'Omak_aa181030125646-1' },
             { x: 1540961905000, y: 0.00005306223, fixtureId: 3080, nominal: 0.0001388, serialNumber: 'Omak_aa181030125754-1' }
         ];
         chai_1.expect(pixieProtoData).to.deep.equal(expectedData);
     });
-    it('pixieSumBy', function () {
-        var pixieProtoData = pixieData.measured.pixieSumBy('fixtureId');
-        var expectedData = 15400;
+    it('pixieSumBy', () => {
+        const pixieProtoData = pixieData.measured.pixieSumBy('fixtureId');
+        const expectedData = 15400;
         chai_1.expect(pixieProtoData).to.deep.equal(expectedData);
     });
-    it('pixieSumByEachObject', function () {
-        var pixieProtoData = pixieData.measured.pixieSumByEachObject(['fixtureId', 'x']);
-        var expectedData = [
+    it('pixieSumByEachObject', () => {
+        const pixieProtoData = pixieData.measured.pixieSumByEachObject(['fixtureId', 'x']);
+        const expectedData = [
             {
                 x: 1517288270000,
                 y: 0.00005306795,
@@ -180,9 +180,9 @@ describe('Pixie ProtoType - @Pixie-ProtoType Function Test', function () {
         ];
         chai_1.expect(pixieProtoData).to.deep.equal(expectedData);
     });
-    it('pixieAddKey', function () {
-        var pixieProtoData = pixieData.measured.pixieAddKey('type', 'scatter');
-        var expectedData = [
+    it('pixieAddKey', () => {
+        const pixieProtoData = pixieData.measured.pixieAddKey('type', 'scatter');
+        const expectedData = [
             { type: 'scatter', x: 1517288270000, y: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
             { type: 'scatter', x: 1538283573000, y: 0.00005302792, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1' },
             { type: 'scatter', x: 1539406636000, y: 0.00005295931, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1' },
@@ -191,9 +191,9 @@ describe('Pixie ProtoType - @Pixie-ProtoType Function Test', function () {
         ];
         chai_1.expect(pixieProtoData).to.deep.equal(expectedData);
     });
-    it('pixieReplaceValue', function () {
-        var pixieProtoData = pixieData.measured.pixieReplaceValue('fixtureId', 1530);
-        var expectedData = [
+    it('pixieReplaceValue', () => {
+        const pixieProtoData = pixieData.measured.pixieReplaceValue('fixtureId', 1530);
+        const expectedData = [
             { x: 1517288270000, y: 0.00005306795, fixtureId: 1530, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
             { x: 1538283573000, y: 0.00005302792, fixtureId: 1530, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1' },
             { x: 1539406636000, y: 0.00005295931, fixtureId: 1530, nominal: 0.0000694, serialNumber: 'Omak_aa181030125646-1' },
@@ -202,9 +202,9 @@ describe('Pixie ProtoType - @Pixie-ProtoType Function Test', function () {
         ];
         chai_1.expect(pixieProtoData).to.deep.equal(expectedData);
     });
-    it('pixiePluckIncrement', function () {
-        var pixieProtoData = pixieData.measured.pixiePluckIncrement('y');
-        var expectedData = [
+    it('pixiePluckIncrement', () => {
+        const pixieProtoData = pixieData.measured.pixiePluckIncrement('y');
+        const expectedData = [
             { x: 0, y: 0.00005306795 },
             { x: 1, y: 0.00005302792 },
             { x: 2, y: 0.00005295931 },

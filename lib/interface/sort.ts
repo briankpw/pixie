@@ -1,2 +1,1 @@
-import { Sort, SORT, Sorting } from '../model/sort';
-export { SORT, Sort, Sorting };
+export { SORT, Sort, Sorting } from '../model/sort';

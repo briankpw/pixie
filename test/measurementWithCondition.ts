@@ -160,6 +160,7 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
         pass: [{ x: 1540961905000, y: 0.00005306223, serialNumber: 'Omak_aa181030125754-1' }]
       }
     };
+
     expect(pixieData).to.deep.equal(expectedData);
   });
 
@@ -380,6 +381,8 @@ describe('Measurement With Condition- @getPixie Function Test', () => {
         unknown: [{ x: 1543553939000, y: 0.00005297646, serialNumber: 'Omak_aa181030125829-1' }]
       }
     };
+
+       // console.log(JSON.stringify(pixieData));
     expect(pixieData).to.deep.equal(expectedData);
   });
 });

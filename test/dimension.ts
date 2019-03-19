@@ -133,7 +133,7 @@ describe('Dimenson - @getPixie Function Test', () => {
   });
 
   it('1D[T:DATE, isIncremental:true]\t\t 1M', () => {
-    const dimension = new Dimension('date', TYPE.DATE, undefined, undefined, true);
+    const dimension = new Dimension('incremental', TYPE.ANY, undefined, undefined, true);
     const measurementList = [new Measurement('firstPass', CONDITION.NONE)];
     const dataAgg = new Aggregate(data, dimension, measurementList);
     const sort = new Sort(SORT.ACS, ['date']);

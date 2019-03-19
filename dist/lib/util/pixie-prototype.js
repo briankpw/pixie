@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var pixie_1 = require("./pixie");
+const pixie_1 = require("./pixie");
 if (!Array.prototype.pixieGroup) {
     Object.defineProperty(Array.prototype, 'pixieGroup', {
         value: function (groupByKey) {

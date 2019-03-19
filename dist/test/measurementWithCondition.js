@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var chai_1 = require("chai");
+const chai_1 = require("chai");
 require("mocha");
-var index = require('../dist/index.js');
-describe('Measurement With Condition- @getPixie Function Test', function () {
-    var data = [
+const index = require('../dist/index.js');
+describe('Measurement With Condition- @getPixie Function Test', () => {
+    const data = [
         {
             timestamp: '2018-10-13T04:57:16.000+00:00',
             serialNumber: 'Omak_aa181030125646-1',
@@ -77,25 +77,25 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
             isAnomaly: null
         }
     ];
-    var TYPE = index.TYPE;
-    var SORT = index.SORT;
-    var CONDITION = index.CONDITION;
-    var Dimension = index.Dimension;
-    var Measurement = index.Measurement;
-    var Aggregate = index.Aggregate;
-    var Condition = index.Condition;
-    var Sort = index.Sort;
-    var Pixie = index.Pixie;
-    it('1D 1M[CONDITION.EQUAL & Rename]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [new Condition('isFalse', CONDITION.EQUAL, 'true', 'isFalseX')];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+    const TYPE = index.TYPE;
+    const SORT = index.SORT;
+    const CONDITION = index.CONDITION;
+    const Dimension = index.Dimension;
+    const Measurement = index.Measurement;
+    const Aggregate = index.Aggregate;
+    const Condition = index.Condition;
+    const Sort = index.Sort;
+    const Pixie = index.Pixie;
+    it('1D 1M[CONDITION.EQUAL & Rename]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [new Condition('isFalse', CONDITION.EQUAL, 'true', 'isFalseX')];
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 unknown: [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -108,16 +108,16 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[CONDITION.NOTEQUAL & Rename]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [new Condition('isFalse', CONDITION.NOTEQUAL, 'true', 'isNotFalse')];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+    it('1D 1M[CONDITION.NOTEQUAL & Rename]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [new Condition('isFalse', CONDITION.NOTEQUAL, 'true', 'isNotFalse')];
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 isNotFalse: [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -130,16 +130,16 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[CONDITION.CONTAIN]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [new Condition('status', CONDITION.CONTAIN, 'pass'), new Condition('status', CONDITION.CONTAIN, 'PASS')];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+    it('1D 1M[CONDITION.CONTAIN]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [new Condition('status', CONDITION.CONTAIN, 'pass'), new Condition('status', CONDITION.CONTAIN, 'PASS')];
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 PASS: [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -154,19 +154,19 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[CONDITION.STARTWITH]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [
+    it('1D 1M[CONDITION.STARTWITH]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [
             new Condition('serialNumber', CONDITION.STARTWITH, 'Omak_ab'),
             new Condition('serialNumber', CONDITION.STARTWITH, 'Omak_a')
         ];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 Omak_ab: [{ x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' }],
                 Omak_a: [
@@ -179,19 +179,19 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[CONDITION.ENDWITH]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [
+    it('1D 1M[CONDITION.ENDWITH]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [
             new Condition('serialNumber', CONDITION.ENDWITH, '902-1'),
             new Condition('serialNumber', CONDITION.ENDWITH, '-1')
         ];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 '-1': [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -204,16 +204,16 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[CONDITION.LESSTHAN]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [new Condition('measured', CONDITION.LESSTHAN, 0.00005302792)];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+    it('1D 1M[CONDITION.LESSTHAN]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [new Condition('measured', CONDITION.LESSTHAN, 0.00005302792)];
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 unknown: [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -228,16 +228,16 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[CONDITION.LESSTHAN OR EQUAL]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [new Condition('measured', CONDITION.LESSTHANOREQUAL, 0.00005302792)];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+    it('1D 1M[CONDITION.LESSTHAN OR EQUAL]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [new Condition('measured', CONDITION.LESSTHANOREQUAL, 0.00005302792)];
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 unknown: [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -252,16 +252,16 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[CONDITION.MORETHAN]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [new Condition('measured', CONDITION.MORETHAN, 0.00005302792)];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+    it('1D 1M[CONDITION.MORETHAN]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [new Condition('measured', CONDITION.MORETHAN, 0.00005302792)];
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 '0.00005302792': [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -276,16 +276,16 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[CONDITION.MORETHAN OR EQUAL]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [new Condition('measured', CONDITION.MORETHANOREQUAL, 0.00005302792)];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+    it('1D 1M[CONDITION.MORETHAN OR EQUAL]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [new Condition('measured', CONDITION.MORETHANOREQUAL, 0.00005302792)];
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 '0.00005302792': [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -300,9 +300,9 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[Mutliple CONDITION & Rename]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [
+    it('1D 1M[Mutliple CONDITION & Rename]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [
             new Condition('isFalse', CONDITION.EQUAL, 'true', 'isFalseX'),
             new Condition('isAnomaly', CONDITION.EQUAL, 'true', 'anomaly'),
             new Condition('status', CONDITION.EQUAL, 'Anomaly', 'anomaly'),
@@ -310,13 +310,13 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
             new Condition('status', CONDITION.CONTAIN, 'Pass', 'pass'),
             new Condition('status', CONDITION.CONTAIN, 'pass', 'pass')
         ];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 pass: [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -331,19 +331,19 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 1M[Mutliple CONDITION & Rename & ToUpperCase]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var conditionList = [
+    it('1D 1M[Mutliple CONDITION & Rename & ToUpperCase]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const conditionList = [
             new Condition('status', CONDITION.EQUAL, 'anomaly', 'anomaly', false),
             new Condition('status', CONDITION.CONTAIN, 'PASS', 'pass', true)
         ];
-        var measurementList = [new Measurement('measured', conditionList, true)];
-        var dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const measurementList = [new Measurement('measured', conditionList, true)];
+        const dimensionList = [new Dimension('serialNumber', TYPE.ANY)];
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: {
                 pass: [
                     { x: 1517288270000, y: 0.00005306795, serialNumber: 'Omak_ab181030125720-1' },
@@ -354,6 +354,7 @@ describe('Measurement With Condition- @getPixie Function Test', function () {
                 unknown: [{ x: 1543553939000, y: 0.00005297646, serialNumber: 'Omak_aa181030125829-1' }]
             }
         };
+        // console.log(JSON.stringify(pixieData));
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
 });

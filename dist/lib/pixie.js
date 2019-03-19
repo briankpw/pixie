@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var sort_1 = require("./interface/sort");
-var aggregate_1 = require("./interface/aggregate");
-var Pixie = /** @class */ (function () {
-    function Pixie(aggregateBinding, sortBinding) {
+const sort_1 = require("./interface/sort");
+const aggregate_1 = require("./interface/aggregate");
+class Pixie {
+    constructor(aggregateBinding, sortBinding) {
         this._measurement = [];
         this._dimension = new aggregate_1.Dimension('null', aggregate_1.TYPE.ANY);
         this._sortType = sort_1.SORT.NONE;
@@ -19,13 +19,12 @@ var Pixie = /** @class */ (function () {
             this._naturalSort = sortBinding.naturalSort;
         }
     }
-    Pixie.prototype.getPixie = function () {
-        var sortData = this.getPixieSort();
+    getPixie() {
+        const sortData = this.getPixieSort();
         return aggregate_1.Pixing(sortData, this._dimension, this._measurement, this._dimensionList);
-    };
-    Pixie.prototype.getPixieSort = function () {
+    }
+    getPixieSort() {
         return sort_1.Sorting(this._data, this._sortType, this._sortProperty, this._naturalSort);
-    };
-    return Pixie;
-}());
+    }
+}
 exports.Pixie = Pixie;

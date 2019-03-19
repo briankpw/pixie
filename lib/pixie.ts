@@ -1,5 +1,3 @@
-import * as _ from 'underscore';
-
 import { Sort, SORT, Sorting } from './interface/sort';
 import { Aggregate, Dimension, Measurement, TYPE, Pixing } from './interface/aggregate';
 

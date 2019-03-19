@@ -25,6 +25,5 @@ export declare class Condition implements ConditionInterface {
     toUpperCase?: boolean | undefined;
     constructor(key: string, condition: CONDITION, match: string | number, rename?: string | undefined, toUpperCase?: boolean | undefined);
 }
-declare function Conditioning(d: any, key: string, condition: CONDITION, match: string, isUpperCase?: boolean): any;
 declare function ConvertNoneCondition(condition: any): any;
-export { Conditioning, ConvertNoneCondition };
+export { ConvertNoneCondition };

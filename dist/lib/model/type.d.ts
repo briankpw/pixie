@@ -42,7 +42,3 @@ export declare class Dimension implements DimensionInterface {
     isIncremental: boolean;
     constructor(column: string, category: TYPE, rename?: string | undefined, defaultValue?: any, isIncremental?: boolean);
 }
-declare function ParseDimension(type: TYPE, value: any, dp: Dimension, index: number): any;
-declare function ParseMeasurement(float: number | undefined, value: number, mp: Measurement, index: number): number;
-declare function ParseMeasurementWithFormula(float: number | undefined, d: any, formula: string): number;
-export { ParseDimension, ParseMeasurement, ParseMeasurementWithFormula };

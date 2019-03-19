@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var chai_1 = require("chai");
+const chai_1 = require("chai");
 require("mocha");
-var index = require('../dist/index.js');
-describe('Measurement - @getPixie Function Test', function () {
-    var data = [
+const index = require('../dist/index.js');
+describe('Measurement - @getPixie Function Test', () => {
+    const data = [
         {
             timestamp: '2018-10-13T04:57:16.000+00:00',
             serialNumber: 'Omak_aa181030125646-1',
@@ -77,22 +77,22 @@ describe('Measurement - @getPixie Function Test', function () {
             isAnomaly: null
         }
     ];
-    var TYPE = index.TYPE;
-    var SORT = index.SORT;
-    var CONDITION = index.CONDITION;
-    var Dimension = index.Dimension;
-    var Measurement = index.Measurement;
-    var Aggregate = index.Aggregate;
-    var Sort = index.Sort;
-    var Pixie = index.Pixie;
-    it('1D 1M', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var measurementList = [new Measurement('measured', CONDITION.NONE)];
-        var dataAgg = new Aggregate(data, dimension, measurementList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+    const TYPE = index.TYPE;
+    const SORT = index.SORT;
+    const CONDITION = index.CONDITION;
+    const Dimension = index.Dimension;
+    const Measurement = index.Measurement;
+    const Aggregate = index.Aggregate;
+    const Sort = index.Sort;
+    const Pixie = index.Pixie;
+    it('1D 1M', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const measurementList = [new Measurement('measured', CONDITION.NONE)];
+        const dataAgg = new Aggregate(data, dimension, measurementList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: [
                 { x: 1517288270000, y: 0.00005306795 },
                 { x: 1538283573000, y: 0.00005302792 },
@@ -103,18 +103,18 @@ describe('Measurement - @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 3M', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var measurementList = [
+    it('1D 3M', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const measurementList = [
             new Measurement('measured', CONDITION.NONE),
             new Measurement('upperLimit', CONDITION.NONE),
             new Measurement('lowerLimit', CONDITION.NONE)
         ];
-        var dataAgg = new Aggregate(data, dimension, measurementList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const dataAgg = new Aggregate(data, dimension, measurementList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: [
                 { x: 1517288270000, y: 0.00005306795 },
                 { x: 1538283573000, y: 0.00005302792 },
@@ -139,19 +139,19 @@ describe('Measurement - @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 2M[DL-3]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var measurementList = [new Measurement('measured', CONDITION.NONE, true), new Measurement('upperLimit', CONDITION.NONE)];
-        var dimensionList = [
+    it('1D 2M[DL-3]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const measurementList = [new Measurement('measured', CONDITION.NONE, true), new Measurement('upperLimit', CONDITION.NONE)];
+        const dimensionList = [
             new Dimension('fixtureId', TYPE.NUMBER),
             new Dimension('nominal', TYPE.DOUBLE),
             new Dimension('serialNumber', TYPE.ANY)
         ];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: [
                 { x: 1517288270000, y: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
                 { x: 1538283573000, y: 0.00005302792, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
@@ -169,19 +169,19 @@ describe('Measurement - @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 2M[DL-3; Float:4]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var measurementList = [new Measurement('measured', CONDITION.NONE, true, 6), new Measurement('upperLimit', CONDITION.NONE, false, 7)];
-        var dimensionList = [
+    it('1D 2M[DL-3; Float:4]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const measurementList = [new Measurement('measured', CONDITION.NONE, true, 6), new Measurement('upperLimit', CONDITION.NONE, false, 7)];
+        const dimensionList = [
             new Dimension('fixtureId', TYPE.NUMBER),
             new Dimension('nominal', TYPE.DOUBLE),
             new Dimension('serialNumber', TYPE.ANY)
         ];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: [
                 { x: 1517288270000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
                 { x: 1538283573000, y: 0.000053, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
@@ -199,22 +199,22 @@ describe('Measurement - @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 2M[DL-3; Rename]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var measurementList = [
+    it('1D 2M[DL-3; Rename]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const measurementList = [
             new Measurement('measured', CONDITION.NONE, true, undefined, undefined, 'value'),
             new Measurement('upperLimit', CONDITION.NONE, false, undefined, undefined, 'values')
         ];
-        var dimensionList = [
+        const dimensionList = [
             new Dimension('fixtureId', TYPE.NUMBER),
             new Dimension('nominal', TYPE.DOUBLE),
             new Dimension('serialNumber', TYPE.ANY)
         ];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: [
                 { x: 1517288270000, value: 0.00005306795, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
                 { x: 1538283573000, value: 0.00005302792, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
@@ -232,22 +232,22 @@ describe('Measurement - @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 2M[DL-3; defaultValue]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var measurementList = [
+    it('1D 2M[DL-3; defaultValue]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const measurementList = [
             new Measurement('measured', CONDITION.NONE, true, undefined, undefined, undefined, 520),
             new Measurement('upperLimit', CONDITION.NONE, false, undefined, undefined, undefined, 100)
         ];
-        var dimensionList = [
+        const dimensionList = [
             new Dimension('fixtureId', TYPE.NUMBER),
             new Dimension('nominal', TYPE.DOUBLE),
             new Dimension('serialNumber', TYPE.ANY)
         ];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: [
                 { x: 1517288270000, y: 520, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
                 { x: 1538283573000, y: 520, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },
@@ -265,22 +265,22 @@ describe('Measurement - @getPixie Function Test', function () {
         };
         chai_1.expect(pixieData).to.deep.equal(expectedData);
     });
-    it('1D 2M[DL-3; isIncremental]', function () {
-        var dimension = new Dimension('timestamp', TYPE.DATE);
-        var measurementList = [
+    it('1D 2M[DL-3; isIncremental]', () => {
+        const dimension = new Dimension('timestamp', TYPE.DATE);
+        const measurementList = [
             new Measurement('measured', CONDITION.NONE, true, undefined, undefined, undefined, undefined, true),
             new Measurement('upperLimit', CONDITION.NONE, false, undefined, undefined, undefined, undefined, false)
         ];
-        var dimensionList = [
+        const dimensionList = [
             new Dimension('fixtureId', TYPE.NUMBER),
             new Dimension('nominal', TYPE.DOUBLE),
             new Dimension('serialNumber', TYPE.ANY)
         ];
-        var dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
-        var sort = new Sort(SORT.ACS, ['timestamp']);
-        var pixie = new Pixie(dataAgg, sort);
-        var pixieData = pixie.getPixie();
-        var expectedData = {
+        const dataAgg = new Aggregate(data, dimension, measurementList, dimensionList);
+        const sort = new Sort(SORT.ACS, ['timestamp']);
+        const pixie = new Pixie(dataAgg, sort);
+        const pixieData = pixie.getPixie();
+        const expectedData = {
             measured: [
                 { x: 1517288270000, y: 0, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125720-1' },
                 { x: 1538283573000, y: 1, fixtureId: 3080, nominal: 0.0000694, serialNumber: 'Omak_aa181030125902-1' },

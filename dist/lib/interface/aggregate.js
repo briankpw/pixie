@@ -1,16 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var type_1 = require("../model/type");
+const _ = require("underscore");
+const redux_1 = require("redux");
+const type_1 = require("../model/type");
 exports.TYPE = type_1.TYPE;
 exports.Dimension = type_1.Dimension;
 exports.Measurement = type_1.Measurement;
-var condition_1 = require("../model/condition");
+const condition_1 = require("../model/condition");
 exports.CONDITION = condition_1.CONDITION;
 exports.Condition = condition_1.Condition;
-var tool_1 = require("../util/tool");
-var _ = require("underscore");
-var Aggregate = /** @class */ (function () {
-    function Aggregate(data, dimension, measurement, dimensionList) {
+const tool_1 = require("../util/tool");
+const reducer_1 = require("../reducer/reducer");
+const Action = require("../action/actions");
+class Aggregate {
+    constructor(data, dimension, measurement, dimensionList) {
         this.data = data;
         this.dimension = dimension;
         this.measurement = measurement;
@@ -18,113 +21,36 @@ var Aggregate = /** @class */ (function () {
         this.measurement = tool_1.AsArray(measurement);
         this.dimensionList = tool_1.AsArray(dimensionList);
     }
-    return Aggregate;
-}());
+}
 exports.Aggregate = Aggregate;
-function Pixing(data, dimension, measurement, dimensionList) {
-    if (dimensionList === void 0) { dimensionList = []; }
-    var filterData = {};
-    var dp = dimension;
-    _.each(data, function (d, index) {
+function Pixing(data, dimension, measurement, dimensionList = []) {
+    const dp = dimension;
+    let conditionStore = redux_1.createStore(reducer_1.ConditionReducer);
+    _.each(data, (d, index) => {
         // Measurement List : Loading All the Setting
-        _.each(measurement, function (mp) {
-            var aggreItem = {};
-            if (_.findWhere(mp.condition, { condition: condition_1.CONDITION.NONE })) {
-                // Get Aggregate Data
-                aggreItem = Aggregating(d, dp, mp, dimensionList, index);
-                // Checking The Filter Data Contain That KEY & Push
-                if (filterData.hasOwnProperty(mp.row)) {
-                    filterData[mp.row].push(aggreItem);
-                }
-                else {
-                    filterData[mp.row] = [aggreItem];
-                }
-            }
-            else {
-                // Process Condition
-                for (var i = 0; i < mp.condition.length; i++) {
-                    var cd = mp.condition[i];
-                    if (condition_1.Conditioning(d, cd.key, cd.condition, cd.match, cd.toUpperCase)) {
-                        aggreItem = Aggregating(d, dp, mp, dimensionList, index);
-                        // If Create any Object;
-                        if (!filterData.hasOwnProperty(mp.row)) {
-                            filterData[mp.row] = {};
-                        }
-                        // Condition : Rename
-                        var conditionKey = void 0;
-                        if (typeof cd.rename !== 'undefined') {
-                            conditionKey = cd.rename;
-                        }
-                        else {
-                            conditionKey = cd.match;
-                        }
-                        // Assign Object to the List
-                        if (filterData[mp.row].hasOwnProperty(conditionKey)) {
-                            filterData[mp.row][conditionKey].push(aggreItem);
-                        }
-                        else {
-                            filterData[mp.row][conditionKey] = [aggreItem];
-                        }
-                        break; // If match Condition
-                    }
-                    else if (i === mp.condition.length - 1) {
-                        // If Until The End of Array, NOT FOUND become unknown
-                        aggreItem = Aggregating(d, dp, mp, dimensionList, index);
-                        if (!filterData.hasOwnProperty(mp.row)) {
-                            filterData[mp.row] = {};
-                        }
-                        // Assign Object to the List
-                        if (filterData[mp.row].hasOwnProperty('unknown')) {
-                            filterData[mp.row]['unknown'].push(aggreItem);
-                        }
-                        else {
-                            filterData[mp.row]['unknown'] = [aggreItem];
-                        }
-                    }
-                }
-            }
+        _.each(measurement, mp => {
+            // Preparing the Data
+            const aggreData = Aggregating(d, dp, mp, dimensionList, index);
+            // Data Based on Condition
+            conditionStore.dispatch(Action.parseCondition(d, mp, aggreData));
         });
     });
-    return filterData;
+    return conditionStore.getState();
 }
 exports.Pixing = Pixing;
 function Aggregating(d, dp, mp, dimensionList, index) {
-    var aggreItem = {};
-    // Dimension : Parsing and Rename
-    if (dp.rename !== undefined) {
-        aggreItem[dp.rename] = type_1.ParseDimension(dp.category, d[dp.column], dp, index);
-    }
-    else {
-        aggreItem['x'] = type_1.ParseDimension(dp.category, d[dp.column], dp, index);
-    }
-    // Measurement : Assign Value Based on Formula or NONE
-    if (mp.formula !== undefined) {
-        // Measurement : Calculate and Apply Formula
-        if (mp.rename !== undefined) {
-            aggreItem[mp.rename] = type_1.ParseMeasurementWithFormula(mp.float, d, mp.formula);
-        }
-        else {
-            aggreItem['y'] = type_1.ParseMeasurementWithFormula(mp.float, d, mp.formula);
-        }
-    }
-    else {
-        // Measurement : Parsing and Rename
-        if (mp.rename !== undefined) {
-            aggreItem[mp.rename] = type_1.ParseMeasurement(mp.float, d[mp.row], mp, index);
-        }
-        else {
-            aggreItem['y'] = type_1.ParseMeasurement(mp.float, d[mp.row], mp, index);
-        }
-    }
+    const aggreItem = {};
+    let dimensionStore = redux_1.createStore(reducer_1.DimensionReducer);
+    let measurementStore = redux_1.createStore(reducer_1.MeasurementReducer);
+    dimensionStore.dispatch(Action.parseDimension(d, index, dp));
+    measurementStore.dispatch(Action.parseMeasurement(d, index, mp));
+    aggreItem[dimensionStore.getState().name] = dimensionStore.getState().value;
+    aggreItem[measurementStore.getState().name] = measurementStore.getState().value;
     // Dimension List : Assign Additional Values Into The Array
     if (mp.dimensionListBind) {
-        _.each(dimensionList, function (dpl, dplIndex) {
-            if (typeof dpl.rename !== 'undefined') {
-                aggreItem[dpl.rename] = type_1.ParseDimension(dpl.category, d[dpl.column], dpl, dplIndex);
-            }
-            else {
-                aggreItem[dpl.column] = type_1.ParseDimension(dpl.category, d[dpl.column], dpl, dplIndex);
-            }
+        _.each(dimensionList, (dpl, dplIndex) => {
+            dimensionStore.dispatch(Action.parseDimension(d, dplIndex, dpl, true));
+            aggreItem[dimensionStore.getState().name] = dimensionStore.getState().value;
         });
     }
     return aggreItem;
