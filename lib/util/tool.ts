@@ -40,22 +40,4 @@ function deepClone(obj: any): any {
       });
 }
 
-function chunkObj(object: Object, size: number) {
-  var values = _.values(object);
-  var final = [];
-  var counter: number = 0;
-  var portion: any = {};
-
-  for (var key in object) {
-    if (counter !== 0 && counter % size === 0) {
-      final.push(portion);
-      portion = {};
-    }
-    portion[key] = values[counter];
-    counter++;
-  }
-  final.push(portion);
-  return final;
-}
-
 export { asArray as AsArray, replaceAll as ReplaceAll, isNumber as IsNumber, deepClone as DeepClone };
