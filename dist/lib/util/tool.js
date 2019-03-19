@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const _ = require("underscore");
+var _ = require("underscore");
 function asArray(input) {
     if (typeof input === 'undefined') {
         return [];

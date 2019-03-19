@@ -39,8 +39,8 @@ function toSort(data, sortProperty, naturalSort) {
     }
     _.each(sortProperty.reverse(), function (d) {
         if (naturalSort) {
-            sortData = nature_sort_1.SortByNatural(sortData, function (obj) {
-                return obj[d];
+            sortData = sortData.sort(function (a, b) {
+                return nature_sort_1.NaturalSort(a, b, d);
             });
         }
         else {

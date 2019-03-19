@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const _ = require("underscore");
+var _ = require("underscore");
 function SortByNatural(obj, value, context) {
     var iterator = _.isFunction(value)
         ? value
@@ -21,7 +21,7 @@ function SortByNatural(obj, value, context) {
 }
 // Performance is 3x Faster of StandardNaturalSort 
 function NaturalSort(a, b, property) {
-    const ax = [], bx = [];
+    var ax = [], bx = [];
     if (a[property] == null) {
         a[property] = '';
     }
@@ -35,9 +35,9 @@ function NaturalSort(a, b, property) {
         bx.push([$1 || Infinity, $2 || '']);
     });
     while (ax.length && bx.length) {
-        const an = ax.shift();
-        const bn = bx.shift();
-        const nn = an[0] - bn[0] || an[1].localeCompare(bn[1]);
+        var an = ax.shift();
+        var bn = bx.shift();
+        var nn = an[0] - bn[0] || an[1].localeCompare(bn[1]);
         if (nn) {
             return nn;
         }
@@ -47,7 +47,7 @@ function NaturalSort(a, b, property) {
 exports.NaturalSort = NaturalSort;
 // Performance is Slow
 function StandardNaturalSort(a, b) {
-    let re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi, sre = /(^[ ]*|[ ]*$)/g, dre = /(^([\w ]+,?[\w ]+)?[\w ]+,?[\w ]+\d+:\d+(:\d+)?[\w ]?|^\d{1,4}[\/\-]\d{1,4}[\/\-]\d{1,4}|^\w+, \w+ \d+, \d{4})/, hre = /^0x[0-9a-f]+$/i, ore = /^0/, i = function (s) {
+    var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi, sre = /(^[ ]*|[ ]*$)/g, dre = /(^([\w ]+,?[\w ]+)?[\w ]+,?[\w ]+\d+:\d+(:\d+)?[\w ]?|^\d{1,4}[\/\-]\d{1,4}[\/\-]\d{1,4}|^\w+, \w+ \d+, \d{4})/, hre = /^0x[0-9a-f]+$/i, ore = /^0/, i = function (s) {
         // return (NaturalSort.insensitive && ('' + s).toLowerCase()) || '' + s;
         return ('' + s).toLowerCase() || '' + s;
     }, 
