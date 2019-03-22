@@ -57,8 +57,8 @@ function Aggregating(d: any, dp: Dimension, mp: Measurement, dimensionList: Arra
 
   // Dimension List : Assign Additional Values Into The Array
   if (mp.dimensionListBind) {
-    _.each(dimensionList, (dpl: any, dplIndex) => {
-      dimensionStore.dispatch(Action.parseDimension(d, dplIndex, dpl, true));
+    _.each(dimensionList, (dpl: any) => {
+      dimensionStore.dispatch(Action.parseDimension(d, index, dpl, true));
       aggreItem[dimensionStore.getState().name] = dimensionStore.getState().value;
     });
   }

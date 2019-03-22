@@ -11,12 +11,12 @@ export function parseDimension(d: any, index: Number, dimension: Dimension, addi
     value = index;
   }
 
-  if (dimension.rename !== undefined) {
-    name = dimension.rename;
-  }
-
   if (additonalBinding) {
     name = dimension.column;
+  }
+
+  if (dimension.rename !== undefined) {
+    name = dimension.rename;
   }
 
   return {

@@ -9,11 +9,11 @@ function parseDimension(d, index, dimension, additonalBinding = false) {
     else if (dimension.isIncremental) {
         value = index;
     }
-    if (dimension.rename !== undefined) {
-        name = dimension.rename;
-    }
     if (additonalBinding) {
         name = dimension.column;
+    }
+    if (dimension.rename !== undefined) {
+        name = dimension.rename;
     }
     return {
         type: dimension.category,
