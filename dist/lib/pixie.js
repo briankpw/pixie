@@ -7,6 +7,7 @@ class Pixie {
         this._measurement = [];
         this._dimension = new aggregate_1.Dimension('null', aggregate_1.TYPE.ANY);
         this._sortType = sort_1.SORT.NONE;
+        this._isSorted = false;
         if (aggregateBinding !== undefined) {
             this._data = aggregateBinding.data;
             this._measurement = aggregateBinding.measurement;
@@ -24,7 +25,13 @@ class Pixie {
         return aggregate_1.Pixing(sortData, this._dimension, this._measurement, this._dimensionList);
     }
     getPixieSort() {
-        return sort_1.Sorting(this._data, this._sortType, this._sortProperty, this._naturalSort);
+        if (this._isSorted) {
+            return this._data;
+        }
+        else {
+            this._isSorted = true;
+            return sort_1.Sorting(this._data, this._sortType, this._sortProperty, this._naturalSort);
+        }
     }
 }
 exports.Pixie = Pixie;

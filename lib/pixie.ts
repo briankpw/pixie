@@ -11,6 +11,7 @@ export class Pixie {
   private _sortType: SORT = SORT.NONE;
   private _sortProperty: Array<string> | undefined;
   private _naturalSort: boolean | undefined;
+  private _isSorted: boolean = false;
 
   constructor(aggregateBinding?: Aggregate, sortBinding?: Sort) {
     if (aggregateBinding !== undefined) {
@@ -34,6 +35,11 @@ export class Pixie {
   }
 
   getPixieSort() {
-    return Sorting(this._data, this._sortType, this._sortProperty, this._naturalSort);
+    if (this._isSorted) {
+      return this._data;
+    } else {
+      this._isSorted = true;
+      return Sorting(this._data, this._sortType, this._sortProperty, this._naturalSort);
+    }
   }
 }
