@@ -30,7 +30,7 @@ export class Aggregate implements AggregateInterface {
 
 function Pixing(data: any, dimension: Dimension, measurement: Array<Measurement>, dimensionList: Array<Dimension> = []) {
   const dp = dimension;
-  let conditionStore: Store<any> = createStore<any>(ConditionReducer);
+  let conditionStore: Store<any> = createStore(ConditionReducer);
 
   _.each(data, (d, index) => {
     // Measurement List : Loading All the Setting
@@ -46,8 +46,8 @@ function Pixing(data: any, dimension: Dimension, measurement: Array<Measurement>
 
 function Aggregating(d: any, dp: Dimension, mp: Measurement, dimensionList: Array<Dimension>, index: number) {
   const aggreItem: any = {};
-  let dimensionStore: Store<DimensionState> = createStore<DimensionState>(DimensionReducer);
-  let measurementStore: Store<MeasurementState> = createStore<MeasurementState>(MeasurementReducer);
+  let dimensionStore: Store<DimensionState> = createStore(DimensionReducer);
+  let measurementStore: Store<MeasurementState> = createStore(MeasurementReducer);
 
   dimensionStore.dispatch(Action.parseDimension(d, index, dp));
   measurementStore.dispatch(Action.parseMeasurement(d, index, mp));
