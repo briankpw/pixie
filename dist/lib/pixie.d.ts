@@ -9,7 +9,9 @@ export declare class Pixie {
     private _sortProperty;
     private _naturalSort;
     private _isSorted;
-    constructor(aggregateBinding?: Aggregate, sortBinding?: Sort);
+    private _debug;
+    constructor(aggregateBinding?: Aggregate, sortBinding?: Sort, debug?: boolean);
     getPixie(): any;
     getPixieSort(): any;
+    private debugging;
 }

@@ -12,8 +12,9 @@ export class Pixie {
   private _sortProperty: Array<string> | undefined;
   private _naturalSort: boolean | undefined;
   private _isSorted: boolean = false;
+  private _debug: boolean = false;
 
-  constructor(aggregateBinding?: Aggregate, sortBinding?: Sort) {
+  constructor(aggregateBinding?: Aggregate, sortBinding?: Sort, debug: boolean = false) {
     if (aggregateBinding !== undefined) {
       this._data = aggregateBinding.data;
       this._measurement = aggregateBinding.measurement;
@@ -27,19 +28,40 @@ export class Pixie {
       this._sortProperty = sortBinding.sortProperty;
       this._naturalSort = sortBinding.naturalSort;
     }
+
+    this._debug = debug;
   }
 
   getPixie() {
     const sortData = this.getPixieSort();
-    return Pixing(sortData, this._dimension, this._measurement, this._dimensionList);
+
+    this.debugging('getPixie');
+    const pixieData = Pixing(sortData, this._dimension, this._measurement, this._dimensionList);
+    this.debugging('getPixie', false);
+    return pixieData;
   }
 
   getPixieSort() {
+    this.debugging('getPixieSort');
+    let sortData;
     if (this._isSorted) {
-      return this._data;
+      sortData = this._data;
     } else {
       this._isSorted = true;
-      return Sorting(this._data, this._sortType, this._sortProperty, this._naturalSort);
+      sortData = Sorting(this._data, this._sortType, this._sortProperty, this._naturalSort);
+    }
+    this.debugging('getPixieSort', false);
+    return sortData;
+  }
+
+  // Debug
+  private debugging(title: string, start = true) {
+    if (this._debug) {
+      if (start) {
+        console.time(title);
+      } else {
+        console.timeEnd(title);
+      }
     }
   }
 }
